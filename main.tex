@@ -12,47 +12,80 @@
 
 \noindent
 \normalsize CSE321 - Web Programming\\
-\textbf{Group 5:} Sterling Blevins, Damon Estrada, Sarah Masters\hfill September 5th, 2019
+\textbf{Group 5:} The Wonderous Avacados\\
+Sterling Blevins, Damon Estrada, Sarah Masters\hfill September 5th, 2019
 % NOTE: Names are alphabetical by last name
  
 \section*{Background}
-Explain why the group determine the theme. (from Project 1)
+The group has decided on designing a website that utilizes the Spotify API because of interest in data analytics, presentation, and the application of a widely available and common API into a project. The Spotify API is a very functional and powerful tool which will allow us to process music for each individual user of the service. We will be able to demonstrate out knowledge of web programming tools while possibly contributing a useful and interactive tool for music listeners everywhere. 
 
 \section*{Website Analysis}
-Analysis of Website.
 
 \noindent
-List five existing websites that are relevant to the theme and describes what functions the websites have. \\
+\textbf{Musical Data Functions{\textsuperscript{[1]}}:}\\
+This website provides statistical information on individual songs. It uses a spider graph to show the user various parameters of a song (valence, dancability, etc). In addition, it offers insight on the popular tracks from the artist in a region selected by the user and statistics on the artist.
+\setlength{\parskip}{7pt}
 
 \noindent
-List and describe the functions the group would like to implement in the website \\
+\textbf{Playlist Manager Functions{\textsuperscript{[2]}}:}\\
+This website allows a user to merge a lot of songs together from multiple playlists. This creates one view which allows the user to modify their existing playlist opposed to changing playlists one at a time. This can be helpful especially when the user has a lot of playlist to manage or if they have a lot of playlist.
+\setlength{\parskip}{7pt}
 
-\begin{tabular}{ |p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+\noindent
+\textbf{Music Popcorn Functions{\textsuperscript{[3]}}:}\\
+This website visualizes genres to the user. Essentially, it clumps genres and sub-genres together alike while distancing the opposite genre as far away as possible visually. This helps show the more important genres being bigger and unknown or less popular genres smaller (popcorn). The user can then explore these genres by clicking on them and being shown songs and artist labeled under each genre.
+\setlength{\parskip}{7pt}
+
+\noindent
+\textbf{Discover Quickly Functions{\textsuperscript{[4]}}:}\\
+This website brings an interface for the user to listen to tracks in a fast manner. Users are usually interested or not in a song within the first few seconds. The website allows the user to hover their mouse over a track while it plays at a key moment in the track to allow the user to decide if they like tit or not. This allows the user to quickly shuffle through recommendations, tracks, and even playlist quickly if under a time constraint or simply trying to find a new song fast.
+\setlength{\parskip}{7pt}
+
+\noindent
+\textbf{Replayify Functions{\textsuperscript{[5]}}:}\\
+This website while basic is informational. It shows the user their latest songs played based on a time period Spotify keep track of in their API. They have short (within the month), medium (past 6 months), and long (last year to the beginning of time) term tracking. This website utilizes to show the user their most played songs respectively to the time period chosen.
+\setlength{\parskip}{7pt}
+
+
+\noindent
+\textbf{Analysis Summary:}\\
+The group would like to implement a blend of the mentioned websites similar to our theme. Ideally, we would like to gain as much information on the user as possible through their inputted preferences and data already collected on them. We would use this information to construct personalized playlist for them that differ from the ones already constructed through Spotify. Also, we would like to offer track suggestions based on current listening and other events that the user might be performing at the moment. In addition, we would like to offer statistics to the user based on their listening habits to have them gain insight on their habits or interesting facts about themselves. Finally, we would like to display all of this data in a clean and efficient manner while trying to make it interactive and interesting for the user.
+\setlength{\parskip}{7pt}
+
+\noindent
+\textbf{Functionality Comparison Table:}\\
+
+\noindent
+\begin{tabular}{ |p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
  \hline
- Function & Proposed System & Musical Data \textsuperscript{[1]} & Playlist Manager \textsuperscript{[2]} & Music Popcorn \textsuperscript{[3]}\\
+ Function & Proposed System & Musical Data \textsuperscript{[1]} & Playlist Manager \textsuperscript{[2]} & Music Popcorn \textsuperscript{[3]} & Discover Quickly
+ \textsuperscript{[4]} & Replayify
+ \textsuperscript{[5]}\\
  \hline
- Service Login & V & X & V & X\\
- Playlist Creation & V & V & X & X\\
- Suggestions & V & V & V & V\\
- Statistics & V & V & O & V\\
- Data Display & V & V O & O & V\\
- Interactive & V & V V & V & V\\
- Data Export & V & X O & X & X\\
+ Service Login & V & X & V & X & V & V\\
+ Playlist Creation & V & V & X & X & X & V\\
+ Suggestions & V & V & V & V & V & X\\
+ Statistics & V & V & O & V & O & V\\
+ Data Display & V & V & O & V & O & V\\
+ Interactive & V & V & V & V & V & V\\
+ Data Export & V & X & X & X & X & X\\
  \hline
 \end{tabular}
 
+\textbf{KEY:}\\
+\indent
 V: Able to perform the task \\
 \indent
 X: Unable to perform the task \\
 \indent
 O: Able to perform the task with poor interactive design
 
+\section*{References}
 
-\section*{Reference}
 \noindent
 {\textsuperscript{[1]} https://musicaldata.com/} \\
 {\textsuperscript{[2]} http://playlist-manager.com/} \\
-{\textsuperscript{[3]} http://static.echonest.com/SpotifyPopcorn/}
-
-
+{\textsuperscript{[3]} http://static.echonest.com/SpotifyPopcorn/}\\
+{\textsuperscript{[4]} https://discoverquickly.com/}\\
+{\textsuperscript{[5]} https://replayify.com/login}
 \end{document}
