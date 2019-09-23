@@ -1,52 +1,70 @@
-/* This is for unordered (bulleted) list. */
-ul {
-    list-style-type: none;
-    padding: 0px;
-    text-align: center;
-    background-color: #4faa;
-    /*border: 1px solid;*/
-
-    /* moves the content below */
-    overflow: hidden;
+body {
+  height: 100%;
+	background-image: linear-gradient(#f8f9f9, #f0f0f0);
+	background-repeat: no-repeat;
+  background-attachment: fixed;
+	font-family: "Helvetica";
 }
 
+html {
+	/* Needed for background gradient */
+	height: 100%;
+}
+
+/* This is for unordered (bulleted) list. */
+.menu {
+	list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+	background-color: #191414;
+  text-align: center;
+	overflow: hidden;
+}
+
+
 /* Tag represents a list item in the list */
-li {
+.menu li {
     /* This will shift the menu left */
     float: left;
+    display: block;
+    text-align: center;
     width: 220px;
-    color: #000000;
     /*border-bottom: 1px solid;*/
 }
 
 
-li a {
+.menu a {
     /* This affects the menu button text */
     display: block;
-    padding: 9px;
+    color: white;
+    padding: 14px;
 
     /* No underline under the tab texts */
     text-decoration: none;
 }
 
-li a:hover {
+.menu li:hover {
     /* This gives the impression of menu button once hovered */
-    color: white;
-    background-color: #00d9e0;
+    background-color: #333;
+}
+
+.active {
+  /* Will give an indicator of which page from the menu the website is on */
+  background-color: #1DB954;
 }
 
 /* Image attributes */
 img {
-    float: left;
-    height: 50%;
+    height: 200px;
     max-width: 50%;
+		padding-right: 10px;
+		padding-bottom: 40px;
+
 }
+
 
 /* This will change the layout for each dev */
-div.Person1 {
-    float: left;
-    padding: 0px 20px 20px 0px;
-    margin-right: 15px;
+.Person {
+	display: flex;
 }
-
-
