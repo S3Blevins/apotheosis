@@ -1,0 +1,52 @@
+/* This is for unordered (bulleted) list. */
+ul {
+    list-style-type: none;
+    padding: 0px;
+    text-align: center;
+    background-color: #4faa;
+    /*border: 1px solid;*/
+
+    /* moves the content below */
+    overflow: hidden;
+}
+
+/* Tag represents a list item in the list */
+li {
+    /* This will shift the menu left */
+    float: left;
+    width: 220px;
+    color: #000000;
+    /*border-bottom: 1px solid;*/
+}
+
+
+li a {
+    /* This affects the menu button text */
+    display: block;
+    padding: 9px;
+
+    /* No underline under the tab texts */
+    text-decoration: none;
+}
+
+li a:hover {
+    /* This gives the impression of menu button once hovered */
+    color: white;
+    background-color: #00d9e0;
+}
+
+/* Image attributes */
+img {
+    float: left;
+    height: 50%;
+    max-width: 50%;
+}
+
+/* This will change the layout for each dev */
+div.Person1 {
+    float: left;
+    padding: 0px 20px 20px 0px;
+    margin-right: 15px;
+}
+
+
