@@ -1,18 +1,39 @@
+html {
+	/* Needed for background gradient */
+	height: 100%;
+}
+
 body {
   height: 100%;
 	background-image: linear-gradient(#f8f9f9, #f0f0f0);
 	background-repeat: no-repeat;
   background-attachment: fixed;
 	font-family: "Helvetica";
+
+  /* Needed to extend menu bar to edges */
+  /* Does not work in the header */
+  margin: 0px;
+  padding: 0px;
 }
 
-html {
-	/* Needed for background gradient */
-	height: 100%;
+.navigation {
+	background-color: #191414;
+  height: 75px;
+  display: flex;
+}
+
+.logo {
+  height: 45px;
+  max-width: 50%;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 15px;
+  display: inline-block;
 }
 
 /* This is for unordered (bulleted) list. */
 .menu {
+  display: block;
 	list-style-type: none;
   margin: 0px;
   padding: 0px;
@@ -22,31 +43,32 @@ html {
 	overflow: hidden;
 }
 
-
 /* Tag represents a list item in the list */
 .menu li {
-    /* This will shift the menu left */
-    float: left;
-    display: block;
-    text-align: center;
-    width: 220px;
-    /*border-bottom: 1px solid;*/
+  /* This will shift the menu left */
+  float: left;
+  display: block;
+  text-align: center;
+  width: 220px;
+  padding-top: 30px;
+  margin:0px;
+  /*border-bottom: 1px solid;*/
 }
-
 
 .menu a {
-    /* This affects the menu button text */
-    display: block;
-    color: white;
-    padding: 14px;
+  /* This affects the menu button text */
+  display: block;
+  color: white;
+  padding: 14px;
 
-    /* No underline under the tab texts */
-    text-decoration: none;
+  /* No underline under the tab texts */
+  text-decoration: none;
 }
 
-.menu li:hover {
-    /* This gives the impression of menu button once hovered */
-    background-color: #333;
+.menu a:hover:not(.active) {
+  /* This gives the impression of menu button once hovered */
+  background-color: #333333;
+  color: #BFBFBF;
 }
 
 .active {
@@ -54,17 +76,36 @@ html {
   background-color: #1DB954;
 }
 
-/* Image attributes */
-img {
-    height: 200px;
-    max-width: 50%;
-		padding-right: 10px;
-		padding-bottom: 40px;
-
+.text {
+  margin: 10px;
+  width: 700px;
 }
 
+hr {
+  width: 50%;
+  color: #D0D0D0;
+  text-align: left;
+  margin-left: 0;
+}
+
+/* Image attributes */
+.Person img {
+  height: 200px;
+	padding-right: 10px;
+	padding-bottom: 40px;
+}
+
+.caption {
+  width: 500px;
+
+}
 
 /* This will change the layout for each dev */
 .Person {
 	display: flex;
+
+}
+
+h4 {
+  margin-bottom: 2px;
 }
