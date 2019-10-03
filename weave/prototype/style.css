@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300&display=swap');
 body {
 	background-color: #F5F5F5;
 }
 
 /* Renamed img to classes to prevent every img from spinning. */
-.spin {
+#spin {
 	transition: all .8s;
   transition-timing: ease-in-out;
 }
 
-.spin:hover {
+#spin:hover {
 	transform: rotate(360deg);
 }
 
@@ -75,35 +76,42 @@ body {
 		margin-right: 10px;
 }
 
-/* TODO: Align and space based on other elements instead of a static number. */
-.spotify-login-button {
-    margin-left: 300px;
-    margin-top: 500px;
-
-    max-height: 250px;
-    max-width: 250px;
-
-    /* Wrap the image instead of having extra padding */
-    display: block;
+.logins {
+	position: absolute;
+	top: 50%;
+	left:50%;
+	transform: translateY(-50%);
+	transform: translateX(-50%);
 }
 
-.no-login-button {
-    background-color: gray;
-    max-height: 250px;
-    max-width: 250px;
+.login-button {
 
-    color: white;
-    padding: 10px 10px 10px 10px;
-    text-align: center;
-    display: block;
-    font-size: 16px;
-    border-radius: 80px;
+  max-height: 250px;
+  max-width: 250px;
 
-    margin-left: 300px;
-    margin-top: 50px;
-
+  /* Wrap the image instead of having extra padding */
 }
 
-a.no-login-button:hover {
+/* TODO: Image and Button don't match. We should replace with an image */
+#no-use-spotify {
+	background-color: gray;
+
+	color: white;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
+	display: block;
+	font-size: 13px;
+	border-radius: 80px;
+	font-family: 'Montserrat', sans-serif;
+
+  margin-top: 20px;
+}
+
+
+#no-use-spotify:hover {
     background-color: #1f2833;
+}
+
+#use-spotify:hover {
+		filter: brightness(0.4);
 }
