@@ -24,40 +24,72 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 
-    <!-- Black navigation bar fixed to top when scrolling -->
-    <nav class="navbar">
-      <a class="navbar-brand" data-toggle="collapse" data-target="#sidebar">
-        <span class="glyphicon glyphicon-align-left" color="white"></span>
-      </a>
+    <div class="site-nav">
+      <!-- Blue navigation bar fixed to top when scrolling -->
+      <nav class="navbar navbar-static-top" id="topbar">
 
-      <a class="navbar-brand" href="index.html"><img id="spin" style="max-height: 20px" alt="Apotheosis" src="media/logo_short_white.png"></a>
-      <a class="navbar-brand" href="index.html">HOME</a>
-      <a class="navbar-brand" href="visualize.html">VISUALIZE</a>
-      <a class="navbar-brand" href="playlists.html">PLAYLISTS</a>
-      <a class="navbar-brand" href="settings.html">SETTINGS</a>
+        <a class="navbar-brand" href="index.html">
+          <img id="spin" style="max-height: 20px" alt="Apotheosis" src="media/logo_short_white.png">
+        </a>
 
-    </nav>
+        <a class="navbar-brand" data-toggle="collapse" data-target="#sidebar">
+          <span class="glyphicon glyphicon-align-left"></span>
+        </a>
 
-    <div class="collapse" id="sidebar">
-      <div class="menu">
+        <a class="navbar-brand" data-toggle="collapse" data-target="#userbar">
+          <span class="glyphicon glyphicon-user"></span>
+        </a>
 
-        <ul class="list-unstyled">
-          <li>
-            <a href="index.html"><span class="glyphicon glyphicon-home"></span>HOME</a>
-          </li>
-          <li>
-            <a href="visualize.html"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
-          </li>
-          <li>
-            <a href="playlists.html"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
-          </li>
-          <li>
-            <a href="settings.html"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
-          </li>
-        </ul>
+      </nav>
 
+      <!-- user bar with user info, login/logout, etc -->
+      <div class="collapse nav navbar-nav" id="userbar">
+      	<nav class="nav">
+
+      		<a class="navbar-brand">
+      			<span class="glyphicon glyphicon-headphones" ></span>
+      		</a>
+
+          <a class="navbar-brand">
+      			<span class="glyphicon glyphicon-random" ></span>
+      		</a>
+
+
+          <a class="navbar-brand navbar-right">logout &nbsp
+            <span class="glyphicon glyphicon-off" ></span>
+          </a>
+
+      	</nav>
       </div>
+
+      <!-- Collapsable side menu bar -->
+      <!-- TODO: figure out how to get the menu to open from the side -->
+      <div class="collapse nav navbar-nav navbar-left" id="sidebar">
+
+        <!-- Needs subclass otherwise there are javascript issues -->
+        <div class="menu">
+          <ul class="list-unstyled">
+            <li id="active">
+              <a href="index.html"><span class="glyphicon glyphicon-home"></span>HOME</a>
+            </li>
+            <li>
+              <a href="visualize.html"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
+            </li>
+            <li>
+              <a href="playlists.html"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
+            </li>
+            <li>
+              <a href="settings.html"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- -->
+
+
     </div>
+
 
   </body>
 </html>

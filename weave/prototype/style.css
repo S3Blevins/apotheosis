@@ -11,34 +11,65 @@ img:hover {
 	transform: rotate(360deg);
 }
 
+
+#topbar {
+	background-color: #1f2833;
+	margin-bottom: 0px;
+	box-shadow: 0px 5px 5px grey;
+}
+
+/* changes icons in top bar to off-white */
+#topbar .navbar-brand {
+	color:  #f9f9f9;
+}
+
 .menu {
 	/* Add some design elements */
   text-decoration: none;
-	background-color: #222629;
+	background-color: white;
+
 	color: white;
 
 	height: 100vh;
-	width: 275px;
+	width: 250px;
 }
 
 .menu a {
-    /* This affects the menu button text */
-    display: block;
-		margin-left: 20px;
-    padding: 15px;
+  /* This affects the menu button text */
+  display: block;
+	margin-left: 10px;
+  padding: 15px;
 
-    /* No underline under the tab texts */
-    text-decoration: none;
-		color: #61892F;
+  /* No underline under the tab texts */
+  text-decoration: none;
+	color: grey;
 
-		font-size: 1.3em;
-    line-height: 1.7em;
+	font-size: 1.3em;
+  line-height: 1.7em;
 }
 
+/* adds padding to icons */
 .menu span {
 	padding-right: 15px;
 }
 
+/* same color as the background of website */
 .menu a:hover {
-	color: #86C232;
+	color: #E1E1E1;
+}
+
+/* needed to apply everything under active */
+#active > * {
+	color: #1f2833;
+	text-decoration: underline;
+}
+
+#userbar {
+	background-color: white;
+	width: 100vw;
+}
+
+#userbar .navbar-brand {
+		color: #1f2833;
+		margin-right: 10px;
 }
