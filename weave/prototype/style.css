@@ -2,12 +2,13 @@ body {
 	background-color: #F5F5F5;
 }
 
-img {
+/* Renamed img to classes to prevent every img from spinning. */
+.spin {
 	transition: all .8s;
   transition-timing: ease-in-out;
 }
 
-img:hover {
+.spin:hover {
 	transform: rotate(360deg);
 }
 
@@ -72,4 +73,37 @@ img:hover {
 #userbar .navbar-brand {
 		color: #1f2833;
 		margin-right: 10px;
+}
+
+/* TODO: Align and space based on other elements instead of a static number. */
+.spotify-login-button {
+    margin-left: 300px;
+    margin-top: 500px;
+
+    max-height: 250px;
+    max-width: 250px;
+
+    /* Wrap the image instead of having extra padding */
+    display: block;
+}
+
+.no-login-button {
+    background-color: gray;
+    max-height: 250px;
+    max-width: 250px;
+
+    color: white;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    border-radius: 80px;
+
+    margin-left: 300px;
+    margin-top: 50px;
+
+}
+
+a.no-login-button:hover {
+    background-color: #1f2833;
 }
