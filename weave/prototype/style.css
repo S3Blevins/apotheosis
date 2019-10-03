@@ -1,14 +1,13 @@
 body {
-	background-color: #D1D7E0;
+	background-color: #F5F5F5;
 }
 
 img {
-	-webkit-transition: -webkit-transform .8s ease-in-out;
-	transition: transform .8s ease-in-out;
+	transition: all .8s;
+  transition-timing: ease-in-out;
 }
 
 img:hover {
-	-webkit-transform: rotate(360deg);
 	transform: rotate(360deg);
 }
 
