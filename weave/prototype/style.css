@@ -25,6 +25,10 @@ body {
 	color:  #f9f9f9;
 }
 
+#topbar .navbar-brand:hover {
+	color:  #4362a0;
+}
+
 .menu {
 	/* Add some design elements */
   text-decoration: none;
@@ -86,7 +90,6 @@ body {
 
 .login-button {
 
-  max-height: 250px;
   max-width: 250px;
 
   /* Wrap the image instead of having extra padding */
