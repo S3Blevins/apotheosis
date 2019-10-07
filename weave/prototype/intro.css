@@ -1,0 +1,71 @@
+body {
+	background-image: url("media/img.jpg");
+		background-size: 400%, 400%;
+	 background-repeat: no-repeat;
+
+	animation: shimmer 200s ease infinite;
+}
+
+	@keyframes shimmer {
+		 0%{background-position:0% 50%}
+		 50%{background-position:100% 50%}
+		 100%{background-position:0% 50%}
+	}
+
+.entry {
+	position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.intro {
+	position: absolute;
+  top: 30%;
+  left:50%;
+  transform: translate(-70%,50%);
+	transition: all .8s;
+	transition-timing: ease-in-out;
+}
+
+.intro:hover {
+
+}
+
+.intro:hover #logo-word{
+	transform: opacity ease-in;
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.intro:hover #logo{
+	transform: rotate(360deg);
+}
+
+#logo {
+	transition: all .8s;
+	transition-timing: ease-in-out;
+}
+
+#logo-word {
+	transition: all .8s;
+	transform: translateX(-15px);
+	transition-timing: ease-in-out;
+	opacity:0;
+}
+
+.login-button {
+
+  max-width: 250px;
+	margin:10px;
+
+  /* Wrap the image instead of having extra padding */
+}
+
+#no-use-spotify:hover {
+		filter: brightness(0.4);
+}
+
+#use-spotify:hover {
+		filter: brightness(0.4);
+}
