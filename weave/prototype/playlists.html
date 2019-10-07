@@ -28,6 +28,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 <script src="script.js"></script>
+<script src="menu.js"></script>
 
 <div class="site-nav">
     <!-- Blue navigation bar fixed to top when scrolling -->
@@ -37,7 +38,7 @@
             <img id="spin" style="max-height: 20px" alt="Apotheosis" src="media/logo_short_white.png" class="spin">
         </a>
 
-        <a class="navbar-brand" data-toggle="collapse" data-target="#sidebar">
+        <a onclick="menuSlideOut()" class="navbar-brand">
             <span class="glyphicon glyphicon-align-left"></span>
         </a>
 
@@ -69,7 +70,7 @@
 
     <!-- Collapsable side menu bar -->
     <!-- TODO: figure out how to get the menu to open from the side -->
-    <div class="collapse nav navbar-nav navbar-left" id="sidebar">
+    <div class="nav navbar-nav navbar-left sidebar" id="sidebar">
 
         <!-- Needs subclass otherwise there are javascript issues -->
         <div class="menu">
@@ -91,12 +92,12 @@
     </div>
 </div>
 
-<div class="page-header">
-    <h1>Playlists <small>The music you enjoy and more.</small></h1>
-</div>
-
 <div class="container overflow-auto">
-    <div class="row">
+    <div class="row" style="margin-top: 40px;">
+      <div class="page-header">
+          <h1>Playlists <small>The music you enjoy and more.</small></h1>
+      </div>
+
         <div class="col-lg-12" style="background-color: #c7c7c7;">
             <h1>Your Playlists</h1>
             <a href="#"><img class="playlist"></a>
