@@ -118,3 +118,11 @@ body {
 #use-spotify:hover {
 		filter: brightness(0.4);
 }
+
+
+.playlist {
+    background: url("media/apotheosis_coverart.png") 50% 50% no-repeat;
+    width: 30%;
+    height: 200px;
+    display: inline-block;
+}
