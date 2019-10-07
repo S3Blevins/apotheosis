@@ -30,6 +30,7 @@ body {
 }
 
 .menu {
+	position: fixed;
 	/* Add some design elements */
   text-decoration: none;
 	background-color: white;
