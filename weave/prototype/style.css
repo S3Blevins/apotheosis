@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300&display=swap');
+
+
 body {
 	background-color: #F5F5F5;
 }
@@ -13,6 +15,13 @@ body {
 	transform: rotate(360deg);
 }
 
+.site-nav {
+	margin-top: 0px;
+	padding-top: 0px;
+	position: fixed;
+	z-index: 10;
+	width:100%;
+}
 
 #topbar {
 	background-color: #1f2833;
@@ -29,11 +38,24 @@ body {
 	color:  #4362a0;
 }
 
+.sidebar {
+	transition: all .8s;
+	transition-timing: ease-in-out;
+
+	transform: translateX(-250px);
+}
+
+.sidebar-show {
+		transform: translateX(0px);
+}
+
 .menu {
-	position: fixed;
 	/* Add some design elements */
+
   text-decoration: none;
 	background-color: white;
+
+
 
 	color: white;
 

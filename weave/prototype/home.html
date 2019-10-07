@@ -33,7 +33,7 @@
           <img id="spin" style="max-height: 20px" alt="Apotheosis" src="media/logo_short_white.png" class="spin">
         </a>
 
-        <a class="navbar-brand" data-toggle="collapse" data-target="#sidebar">
+        <a onclick="menuSlideOut()" class="navbar-brand">
           <span class="glyphicon glyphicon-align-left"></span>
         </a>
 
@@ -65,7 +65,7 @@
 
       <!-- Collapsable side menu bar -->
       <!-- TODO: figure out how to get the menu to open from the side -->
-      <div class="collapse nav navbar-nav navbar-left" id="sidebar">
+      <div class="nav navbar-nav navbar-left sidebar" id="sidebar">
 
         <!-- Needs subclass otherwise there are javascript issues -->
         <div class="menu">
@@ -88,8 +88,15 @@
     </div>
 
     <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
-    <div id="radarChartId"><canvas id="LastListened"></canvas></div>
+    <div class="fixed-bottom" id="radarChartId"><canvas id="LastListened"></canvas></div>
     <script src="LastListened.js"></script>
+
+<!-- cannot get the menu javascript to only look at ID so need ID and class. -->
+<script>
+  function menuSlideOut() {
+    document.getElementById("sidebar").classList.toggle("sidebar-show");
+  }
+</script>
 
   </body>
 </html>
