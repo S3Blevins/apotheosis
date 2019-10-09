@@ -15,8 +15,15 @@
     <!-- Our own CSS -->
     <link rel="stylesheet" href="style.css">
 
-      <!-- include Charts.js in our page -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- include Charts.js in our page -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <style>
+      .media-object {
+        max-height: 50px;
+      }
+    </style>
+
   </head>
 
   <body>
@@ -88,11 +95,165 @@
       </div>
     </div>
 
-    <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
-    <div class="fixed-bottom" id="radarChartId"><canvas id="LastListened"></canvas></div>
-    <script src="LastListened.js"></script>
+  <div class="container overflow-auto" style="margin-bottom: 70px;">
+      <div class="row" style="margin-top: 40px;">
 
-<!-- cannot get the menu javascript to only look at ID so need ID and class. -->
+        <div class="col-lg-8 jumbotron">
+          <h1>Hello, user!</h1>
+          <p>Welcom to Apotheosis, where you can visualize your music tastes and explore related content.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Settings</a></p>
+        </div>
+
+        <div class="col-lg-4">
+          <img src="media/empty-profile.png" alt="profile picture">
+        </div>
+
+        <div class="col-lg-6 col-md-3">
+          <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
+          <h2>Listening Habbits:</h2>
+          <canvas class="chart" id="LastListened"></canvas>
+        </div>
+
+        <div class="col-lg-6 col-md-3">
+          <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
+          <h2>Last Listened to Music:</h2>
+          <div class="list-group">
+            <a href="#" class="list-group-item">Song/Artist</a>
+            <a href="#" class="list-group-item">Song/Artist</a>
+            <a href="#" class="list-group-item">Song/Artist</a>
+            <a href="#" class="list-group-item">Song/Artist</a>
+            <a href="#" class="list-group-item">Song/Artist</a>
+          </div>
+        </div>
+
+        <div class="col-lg-12" style="background-color: #c7c7c7; margin-top:30px; margin-bottom:30px;">
+          <h1>your spotify music</h1>
+          <div class="pre-scrollable">
+
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+
+            <div class="col-xs-3 col-md-2">
+              <a href="#" class="thumbnail">
+                <img src="media/apotheosis_coverart.png" alt="...">
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+
+          <div class="col-lg-3">
+            <img src="media/apotheosis_coverart.png" alt="music" style="max-height:250px;">
+          </div>
+
+          <div class="col-lg-9">
+            <div class="media">
+              <div class="media-left media-middle">
+                <a href="#">
+                  <img class="media-object" src="media/apotheosis_coverart.png" alt="music">
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">music news topic</h4>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+              </div>
+            </div>
+
+            <div class="media">
+              <div class="media-left media-middle">
+                <a href="#">
+                  <img class="media-object" src="media/apotheosis_coverart.png" alt="music">
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">music news topic</h4>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+              </div>
+            </div>
+
+            <div class="media">
+              <div class="media-left media-middle">
+                <a href="#">
+                  <img class="media-object" src="media/apotheosis_coverart.png" alt="music">
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">music news topic</h4>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script src="LastListened.js"></script>
 
   </body>
+
 </html>
