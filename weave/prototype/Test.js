@@ -128,4 +128,48 @@ function getRecentlyListenedTracks(limit, before, after) {
             console.log(response);
             var artists = '';
 
-            /* Get the items from the response (The limit) trac
+            /* Get the items from the response (The limit) tracks. */
+            res = JSON.parse(JSON.stringify(response.items));
+
+            /* Parse JSON to section off track name and artists.
+               Update home.html with the results. */
+
+            for (i = 0; i < res.length; i++) {
+                for (j = 0; j < res[i].track.artists.length; j++) {
+                    /* Do not pout comma after last artist */
+                    if (res[i].track.artists.length == 1) {
+                        artists = artists.concat(res[i].track.artists[j].name);
+                    } else if (res[i].track.artists.length > 1) {
+                        if (j == res[i].track.artists.length - 1) {
+                            artists = artists.concat(res[i].track.artists[j].name);
+                        } else if (j == res[i].track.artists.length - 2) {
+                            artists = artists.concat(res[i].track.artists[j].name + " and ");
+                        } else {
+                            artists = artists.concat(res[i].track.artists[j].name + ", ");
+                        }
+                    }
+                }
+
+                /* Publish to home.html based on id of each element. */
+                document.getElementById("last5listened" + [i + 1]).innerHTML = res[i].track.name + " / " + artists;
+                artists = ''; // Clear string so other artist arent copied.
+            }
+        }
+    });
+}
+
+/**
+ * Provided by Spotify Auth guidelines
+ * Generates a random string containing numbers and letters
+ * @param  {number} length The length of the string
+ * @return {string} The generated string
+ */
+function generateRandomString(length) {
+    var text = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
