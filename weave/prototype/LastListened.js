@@ -4,10 +4,14 @@
  *
  * @todo add hover attribute (number corresponding to each attribute.)
  */
- 
- 
+
+
 var chart = document.getElementById('LastListened').getContext('2d');
- 
+
+/**
+ * The Very first chart the user is prompted to showing the last track
+ * they listened to audio analysis.
+ */
 var massPopChart = new Chart(chart, {
     type: 'radar', // bar, horizontal, pie, line, donut, radar, polar charts supported
     data: {
@@ -27,9 +31,9 @@ var massPopChart = new Chart(chart, {
         ]
     }
 });
- 
+
 var chart2 = document.getElementById('duration').getContext('2d');
- 
+
 var styleChart = new Chart(chart2, {
     type: 'bar', // bar, horizontal, pie, line, donut, radar, polar charts supported
     data: {
@@ -49,9 +53,9 @@ var styleChart = new Chart(chart2, {
         ]
     }
 });
- 
+
 var chart3 = document.getElementById('location').getContext('2d');
- 
+
 var locationChart = new Chart(chart3, {
     type: 'pie', // bar, horizontal, pie, line, donut, radar, polar charts supported
     data: {
@@ -69,9 +73,9 @@ var locationChart = new Chart(chart3, {
         ]
     }
 });
- 
+
 var chart4 = document.getElementById('frequency').getContext('2d');
- 
+
 var populationChart = new Chart(chart4, {
     type: 'line', // bar, horizontal, pie, line, donut, radar, polar charts supported
     data: {
@@ -90,9 +94,9 @@ var populationChart = new Chart(chart4, {
         ]
     }
 });
- 
+
 var chart5 = document.getElementById('beat').getContext('2d');
- 
+
 var populationChart = new Chart(chart5, {
     type: 'polarArea', // bar, horizontal, pie, line, donut, radar, polar charts supported
     data: {
