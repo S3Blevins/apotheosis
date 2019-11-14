@@ -64,6 +64,7 @@ function getAccessToken() {
         //getUserTopTracks('long_term', '0', '5');
         getRecentlyListenedTracks('5');
     }
+
 }
 
 function getUserProfile() {
@@ -99,7 +100,7 @@ function getUserTopTracks(time_range, offset, limit) {
 
             /* Get all the track details in the json */
             for (i = 0; i < res.length; i++) {
-                console.log(res[i]);
+                console.log("Track: " + res[i]);
             }
         }
     });
@@ -108,11 +109,14 @@ function getUserTopTracks(time_range, offset, limit) {
 /**
  * Function gets the most recently listened to tracks and sections off the
  * name of the track and artist(s) which is published to home.html.
- * @param  {number} limit The number of tracks we want to fetch at a time.
+ * @param {number} limit The number of tracks we want to fetch at a time.
  * @param {number} before in ms, tracks before UNIX timestamp.
  * @param {number} after in ms, tracks after UNIX timestamp.
  */
 function getRecentlyListenedTracks(limit, before, after) {
+
+    var tracks = []; // For the tracks.
+    var sendArray = 0;
 
     $.get({
         url: 'https://api.spotify.com/v1/me/player/recently-played',
@@ -135,6 +139,7 @@ function getRecentlyListenedTracks(limit, before, after) {
                Update home.html with the results. */
 
             for (i = 0; i < res.length; i++) {
+                tracks.push(res[i]);
                 for (j = 0; j < res[i].track.artists.length; j++) {
                     /* Do not pout comma after last artist */
                     if (res[i].track.artists.length == 1) {
@@ -152,8 +157,34 @@ function getRecentlyListenedTracks(limit, before, after) {
 
                 /* Publish to home.html based on id of each element. */
                 document.getElementById("last5listened" + [i + 1]).innerHTML = res[i].track.name + " / " + artists;
-                artists = ''; // Clear string so other artist arent copied.
+                artists = ''; // Clear string so other artist aren't copied.
             }
+            /* Send first track to get its audio features. */
+            getTrackAudioFeatures(tracks[0].track.id);
+        }
+    });
+}
+
+function getTrackAudioFeatures(trackId) {
+
+    let audioFeatures = [];
+    console.log("Track ID: " + trackId);
+
+    $.get({
+        url: 'https://api.spotify.com/v1/audio-features/' + trackId,
+        headers: {
+            'Authorization': 'Bearer ' + access_token
+        },
+        success: function (response) {
+            audioFeatures.push(response.danceability);
+            audioFeatures.push(response.energy);
+            audioFeatures.push(response.speechiness);
+            audioFeatures.push(response.acousticness);
+            audioFeatures.push(response.instrumentalness);
+            audioFeatures.push(response.liveness);
+            audioFeatures.push(response.valence);
+            console.log(response);
+            updateRadarChart(audioFeatures);
         }
     });
 }
