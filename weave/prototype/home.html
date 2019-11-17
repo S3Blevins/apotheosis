@@ -25,7 +25,6 @@
         max-height: 50px;
       }
     </style>
-
   </head>
 
   <body onload="getAccessToken()">
@@ -101,12 +100,12 @@
 
         <div class="col-lg-8 jumbotron">
           <h1>Hello, user!</h1>
-          <p>Welcom to Apotheosis, where you can visualize your music tastes and explore related content.</p>
+          <p>Welcome to Apotheosis, where you can visualize your music tastes and explore related content.</p>
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Settings</a></p>
         </div>
 
         <div class="col-lg-4">
-          <img src="media/empty-profile.png" alt="profile picture">
+          <img id="userPicture" src="media/empty-profile.png" alt="profile picture">
         </div>
 
         <div class="col-lg-6 col-md-3">
@@ -128,79 +127,78 @@
         </div>
 
         <div class="col-lg-12" style="background-color: #c7c7c7; margin-top:30px; margin-bottom:30px;">
-          <h1>your spotify music</h1>
+          <h1>Your Last Saved Tracks</h1>
           <div class="pre-scrollable">
 
-
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM1">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM2">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM3">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM4">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM5">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM6">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM7">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM8">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM9">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM10">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM11">
               </a>
             </div>
 
             <div class="col-xs-3 col-md-2">
               <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
+                <img src="media/apotheosis_coverart.png" alt="..." id="YSM12">
               </a>
             </div>
           </div>
@@ -219,8 +217,8 @@
                 </a>
               </div>
               <div class="media-body">
-                <h4 class="media-heading">music news topic</h4>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                <h4 class="media-heading">How many tracks you have listened to today.</h4>
+                  <p id="numTracksToday"># tracks listened to today!!!</p>
               </div>
             </div>
 
