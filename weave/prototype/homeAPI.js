@@ -23,8 +23,8 @@ function updateRadarChart(dataArray) {
                 {
                     data: dataArray,
                     label: 'Last Listened Track Audio Features',
-                    backgroundColor: 'rgb(31, 40, 51, 0.25)',
-                    borderColor: '#1f2833',
+                    backgroundColor: 'rgb(149, 94, 189, 0.4)',
+                    borderColor: '#bc70ff',
                     borderWidth: 2,
                     fill: true,
                     pointHoverBackgroundColor: '#e62412'
