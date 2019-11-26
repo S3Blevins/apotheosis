@@ -1,4 +1,11 @@
-<!doctype html>
+<%-- 
+    Document   : playlists
+    Created on : Nov 20, 2019, 5:51:47 PM
+    Author     : damon
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
