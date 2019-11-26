@@ -1,4 +1,11 @@
-<!doctype html>
+<%--
+    Document   : visualize
+    Created on : Nov 20, 2019, 5:48:59 PM
+    Author     : damon
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -16,8 +23,10 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- include Charts.js in our page -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 
+    <!-- For the onload function -->
+    <script src="Visualize.js"></script>
     <style>
       .chart {
           outline-style: solid;
@@ -25,11 +34,10 @@
     </style>
   </head>
 
-  <body>
+  <body onload='callFunctions()'>
     <!-- JavaScript Links need to be in the body (requires Jquery) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
     <script src="menu.js"></script>
 
     <div class="site-nav">
@@ -94,7 +102,6 @@
       </div>
     </div>
 
-
           <div class="container overflow-auto" style="margin-bottom: 70px;">
               <div class="row" style="margin-top: 40px;">
 
@@ -112,14 +119,14 @@
                 <div class="col-lg-6 col-md-3">
                   <h2>Music Genres:</h2>
                   <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
-                  <canvas class="chart" id="duration"></canvas>
+                  <canvas class="chart" id="genres"></canvas>
 
                 </div>
 
                 <div class="col-lg-6 col-md-3">
-                  <h2>Location of Music:</h2>
+                  <h2>Your Top 50 Tracks Mood</h2>
                   <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
-                  <canvas class="chart" id="location"></canvas>
+                  <canvas class="chart" id="moods"></canvas>
 
                 </div>
 
@@ -140,7 +147,7 @@
 
               </div>
 
-          <script src="LastListened.js"></script>
+          <script src="VisualizeCharts.js"></script>
 
   </body>
 </html>
