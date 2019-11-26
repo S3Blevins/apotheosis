@@ -1,4 +1,11 @@
-<!doctype html>
+<%-- 
+    Document   : settings
+    Created on : Nov 20, 2019, 5:52:20 PM
+    Author     : damon
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -239,3 +246,4 @@
     </div>
   </body>
 </html>
+
