@@ -1,14 +1,12 @@
 /* Authorization Grant Flow */
-const client_id = '4429c460396649ee99abf2b6242fadde'; // Our client id
-let redirect_uri = 'https://weave.cs.nmt.edu/apollo5/prototype/home.html'; // Our redirect uri
+var client_id = '4429c460396649ee99abf2b6242fadde'; // Our client id
+var redirect_uri = 'https://weave.cs.nmt.edu/apollo5/final/home.html'; // Our redirect uri
 var auth_url = 'https://accounts.spotify.com/authorize';
 var response_type_token = 'token';
 
 /* Time variables */
-var hourInMs = 3600000;
-var dateNowMS = Date.now();  // Time since EPOCH.
-var dateNowMDYHuman = new Date(dateNowMS).toLocaleDateString();
-var startOfDayMs = new Date(dateNowMDYHuman).getTime();
+const dateNowMS = new Date();  // Time (ms) since EPOCH.
+const secondsSinceEpoch = Math.round(dateNowMS.getTime() / 1000);
 
 /* IF you ever get a 403 error, check to see if you provided the correct scopes below. */
 var scopes = 'user-read-private user-read-recently-played user-library-read user-top-read';// the scopes we are asking the user to agree to.
@@ -22,13 +20,9 @@ var access_token = null;
  */
 function implicitGrantFlow() {
 
-    //sessionStorage.clear(); // remove session variables.
-
     /* If access token has been assigned in the past and is not expired, no request required. */
     if (sessionStorage.getItem("accessToken") !== null &&
-        sessionStorage.getItem("tokenTimeStamp") !== null &&
-        sessionStorage.getItem("tokenTimeStamp") <
-                    (sessionStorage.getItem("tokenTimeStamp").valueOf() + hourInMs)) {
+        sessionStorage.getItem("tokenTimeStamp") !== null) {
 
         /* Navigate to the home page. */
         $(location).attr('href', "home.html");
@@ -38,10 +32,8 @@ function implicitGrantFlow() {
             url: auth_url,
             type: 'GET',
             contentType: 'application/json',
-            cors: true,
-            secure: true,
             headers: {
-                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Origin': '*'
             },
             data: {
                 client_id: client_id,
@@ -52,14 +44,17 @@ function implicitGrantFlow() {
             }
         }).done(function callback(response) {
             /* Redirect user to home page */
+            console.log("COULD THIS BE A SUCCESS?");
             $(location).attr('href', this.url);
 
         }).fail(function (error) {
+            /* Since we cannot modify the server, we will always fail. */
             console.log("ERROR HAPPENED: " + error.status);
             $(location).attr('href', this.url);
-        })
+        });
     }
 }
+
 /**
  * The bread and butter to calling the API. This function will be called once the
  * user is redirected to the home page on success and without rejecting the terms
@@ -83,23 +78,26 @@ function getAccessToken() {
 
             /* If first visit or regaining token, store it in session. */
             if (typeof(Storage) !== "undefined") {
-                // Store
-                sessionStorage.setItem("accessToken", access_token);              // store token.
-                sessionStorage.setItem("tokenTimeStamp", dateNowMS.toString()); // To see if we need a new token later.
-                console.log("Storing Access Token. Stored at: " + sessionStorage.getItem("tokenTimeStamp"));
+                /* Store the access token */
+                sessionStorage.setItem("accessToken", access_token); // store token.
+
+                /* To see if we need a new token later. */
+                sessionStorage.setItem("tokenTimeStamp", secondsSinceEpoch);
+
+                /* Token expire time */
+                sessionStorage.setItem("tokenExpireStamp", secondsSinceEpoch + 3600);
+                console.log("Access Token Time Stamp: "
+                + sessionStorage.getItem("tokenTimeStamp")
+                + " seconds\nOR: " + dateNowMS + "\nToken expires at: "
+                + sessionStorage.getItem("tokenExpireStamp"));
             } else {
                 alert("Your browser does not support web storage...\nPlease try another browser.");
             }
-
         } else {
             console.log('URL has no hash; no access token');
         }
     } else {
-        let tokenExpireTime = Math.floor((parseInt(sessionStorage.getItem("tokenTimeStamp").valueOf())
-            + hourInMs) / 60000);
-        let tokenStamp = Math.floor(dateNowMS / 60000);
-        console.log("Access Token still valid and not NULL :)\nToken expires in: "
-                                                        + (tokenExpireTime - tokenStamp) + " minutes");
+        console.log("Access Token still valid and not NULL :)");
     }
 
     if (access_token != null) {
@@ -116,7 +114,7 @@ function getAccessToken() {
  */
 function getUserProfile() {
 
-    let res;
+    var res;
 
     $.get({
         url: 'https://api.spotify.com/v1/me',
@@ -124,8 +122,8 @@ function getUserProfile() {
             'Authorization': 'Bearer ' + access_token
         },
         success: function (response) {
-            let img = document.getElementById("userPicture");
-            let loadImg = new Image;
+            var img = document.getElementById("userPicture");
+            var loadImg = new Image;
             loadImg.onload = function () {
                 img.src = this.src;
             };
@@ -245,7 +243,7 @@ function getRecentlyListenedTracks(limit, after) {
  */
 function getUserLibrary(limit, offset) {
 
-    let res;
+    var res;
 
     $.get ({
         url: 'https://api.spotify.com/v1/me/tracks',
@@ -281,7 +279,7 @@ function getUserLibrary(limit, offset) {
  */
 function getTrackAudioFeatures(trackId) {
 
-    let audioFeatures = [];
+    var audioFeatures = [];
 
     $.get({
         url: 'https://api.spotify.com/v1/audio-features/' + trackId,
