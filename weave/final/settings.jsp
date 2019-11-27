@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : settings
     Created on : Nov 20, 2019, 5:52:20 PM
     Author     : damon
@@ -101,13 +101,13 @@
               <a href="home.html"><span class="glyphicon glyphicon-home"></span>HOME</a>
             </li>
             <li>
-              <a href="visualize.html"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
+              <a href="visualize.jsp"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
             </li>
             <li>
-              <a href="playlists.html"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
+              <a href="playlists.jsp"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
             </li>
             <li id="active">
-              <a href="settings.html"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
+              <a href="settings.jsp"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
             </li>
           </ul>
         </div>
@@ -246,4 +246,3 @@
     </div>
   </body>
 </html>
-
