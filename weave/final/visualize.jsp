@@ -4,7 +4,7 @@
     Author     : damon
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!--<%@page contentType="text/html" pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -106,18 +106,18 @@
               <div class="row" style="margin-top: 40px;">
 
                 <div class="page-header">
-                    <h1>visualize <small>Your music and stats.</small></h1>
+                    <h1>Visualize <small>Your music and stats.</small></h1>
                 </div>
 
                 <div class="col-lg-6 col-md-3">
                   <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
-                  <h2>Listening Habbits:</h2>
+                  <h2>Your Favorite Track of All Time</h2>
                   <canvas class="chart" id="LastListened"></canvas>
                 </div>
 
 
                 <div class="col-lg-6 col-md-3">
-                  <h2>Music Genres:</h2>
+                  <h2>Your Favorite Genres of All Time</h2>
                   <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
                   <canvas class="chart" id="genres"></canvas>
 
