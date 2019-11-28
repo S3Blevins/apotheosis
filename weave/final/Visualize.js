@@ -7,10 +7,6 @@ const tokenExpireSec = sessionStorage.getItem("tokenExpireStamp");
 
 const upTokenTime = parseInt(tokenSecOld) + (secondsSinceEpoch - parseInt(tokenSecOld));
 
-//console.log("Token old time: " + tokenSecOld);
-//console.log("Token updated time: " + upTokenTime);
-//console.log("Token expires at: " + sessionStorage.getItem("tokenExpireStamp"));
-
 /* Api stuff */
 var access_token = sessionStorage.getItem("accessToken");
 console.log("access token: " + access_token);
@@ -25,6 +21,7 @@ function callFunctions() {
             /* Call functions here */
             userTopTrack();
             userTopGenres();
+            userTopMood();
 
     } else {
         console.log("Getting a new acess token...Redirecting");
@@ -75,13 +72,13 @@ function getTrackAudioFeatures(trackId) {
         },
         success: function (response) {
             /* These are the values that will be published on the radar chart. */
-            audioFeatures.push(response.danceability);
-            audioFeatures.push(response.energy);
-            audioFeatures.push(response.speechiness);
-            audioFeatures.push(response.acousticness);
-            audioFeatures.push(response.instrumentalness);
-            audioFeatures.push(response.liveness);
-            audioFeatures.push(response.valence);
+            audioFeatures.push(parseFloat(response.danceability).toFixed(2));
+            audioFeatures.push(parseFloat(response.energy).toFixed(2));
+            audioFeatures.push(parseFloat(response.speechiness).toFixed(2));
+            audioFeatures.push(parseFloat(response.acousticness).toFixed(2));
+            audioFeatures.push(parseFloat(response.instrumentalness).toFixed(2));
+            audioFeatures.push(parseFloat(response.liveness).toFixed(2));
+            audioFeatures.push(parseFloat(response.valence).toFixed(2));
             updateRadarChart(audioFeatures);
         },
         fail: function () {
@@ -89,7 +86,6 @@ function getTrackAudioFeatures(trackId) {
         }
     });
 }
-
 
 function userTopGenres() {
 
@@ -224,4 +220,110 @@ function recheck(array) {
             filtered = 1;
         }
     } while (filtered == 0);
+}
+
+function userTopMood() {
+
+    var trackIds = [];
+
+    $.get({
+        url: 'https://api.spotify.com/v1/me/top/tracks',
+        headers: {
+            'Authorization': 'Bearer ' + access_token,
+        },
+        data: {
+            limit: 50, // This is how many tracks to show (50 max @ a time).
+            time_range: 'long_term' // long_term time range to get favorite track.
+        },
+        success: function (response) {
+            //console.log(response);
+            /* Get the items from the response (The limit) tracks. */
+            res = JSON.parse(JSON.stringify(response.items));
+
+            /* Get the artists ids (even multiple artist on a track). */
+            for (i = 0; i < res.length; i++) {
+                /* Spotify api limits 50 ids at a time. */
+                trackIds.push(res[i].id);
+            }
+
+            getValence(trackIds);
+        },
+        fail: function () {
+            console.log("getUserTopTracks(): api call failed!");
+        }
+    });
+}
+
+function getValence(trackIds) {
+
+    var trackValence = [];        // The # of tracks that follow the filters.
+    var trackIdsString = "";     // The query constructed of artis ids.
+    var euphoric = 0;           // 100-90
+    var happy = 0;             //  89 - 70
+    var neutral = 0;          // 69 - 50
+    var discouraging = 0;    // 49-30
+    var despressing = 0;    // 29 - 11
+    var youOkay = 0;       // 10-0
+
+    /* populate id string for query */
+    for (i = 0; i < trackIds.length; i++) {
+        if (i + 1 === trackIds.length) {
+            trackIdsString += trackIds[i];
+        } else {
+            trackIdsString += trackIds[i] + ",";
+        }
+    }
+
+    $.get({
+        url: 'https://api.spotify.com/v1/audio-features',
+        headers: {
+            'Authorization': 'Bearer ' + access_token,
+        },
+        data: {
+            ids: trackIdsString
+        },
+        success: function (response) {
+            //console.log(response);
+            /* Get the items from the response (The limit) tracks. */
+            res = JSON.parse(JSON.stringify(response.audio_features));
+
+            /* Get the artists ids (even multiple artist on a track). */
+            for (i = 0; i < res.length; i++) {
+
+                /* Filter the results ito respective arrays. */
+                if (parseFloat(res[i].valence).toFixed(2) <= 1.00
+                    && parseFloat(res[i].valence).toFixed(2) >= 0.90) {
+                    euphoric++;
+                } else if (parseFloat(res[i].valence).toFixed(2) < 0.90
+                    && parseFloat(res[i].valence).toFixed(2) >= 0.70) {
+                    happy++;
+                } else if (parseFloat(res[i].valence).toFixed(2) < 0.70
+                    && parseFloat(res[i].valence).toFixed(2) >= 0.50) {
+                    neutral++;
+                } else if (parseFloat(res[i].valence).toFixed(2) < 0.50
+                    && parseFloat(res[i].valence).toFixed(2) >= 0.30) {
+                    discouraging++;
+                } else if (parseFloat(res[i].valence).toFixed(2) < 0.30
+                    && parseFloat(res[i].valence).toFixed(2) >= 0.11) {
+                    despressing++;
+                } else {
+                    youOkay++;
+                }
+            }
+
+            trackValence.push(euphoric);
+            trackValence.push(happy);
+            trackValence.push(neutral);
+            trackValence.push(discouraging);
+            trackValence.push(despressing);
+            trackValence.push(youOkay);
+
+            updateMoodsChart(trackValence);
+        },
+        fail: function () {
+            console.log("getUserTopTracks(): api call failed!");
+        }
+    });
+
+
 }
