@@ -8,6 +8,11 @@ var response_type_token = 'token';
 const dateNowMS = new Date();  // Time (ms) since EPOCH.
 const secondsSinceEpoch = Math.round(dateNowMS.getTime() / 1000);
 
+const tokenSecOld = sessionStorage.getItem("tokenTimeStamp");
+const tokenExpireSec = sessionStorage.getItem("tokenExpireStamp");
+
+const upTokenTime = parseInt(tokenSecOld) + (secondsSinceEpoch - parseInt(tokenSecOld));
+
 /* IF you ever get a 403 error, check to see if you provided the correct scopes below. */
 var scopes = 'user-read-private user-read-recently-played user-library-read user-top-read';// the scopes we are asking the user to agree to.
 var state = generateRandomString(16);
@@ -22,10 +27,13 @@ function implicitGrantFlow() {
 
     /* If access token has been assigned in the past and is not expired, no request required. */
     if (sessionStorage.getItem("accessToken") !== null &&
-        sessionStorage.getItem("tokenTimeStamp") !== null) {
+        sessionStorage.getItem("tokenTimeStamp") !== null &&
+        upTokenTime < tokenExpireSec) {
+            var timeLeft = (tokenExpireSec - upTokenTime);
+            console.log("Token still valid: " + Math.floor(timeLeft / 60) + " minutes left.");
 
-        /* Navigate to the home page. */
-        $(location).attr('href', "home.html");
+            /* Navigate to the home page. */
+            $(location).attr('href', "home.html");
     } else {
         console.log("Token expired or never found, getting new token.");
         $.ajax({
@@ -96,8 +104,17 @@ function getAccessToken() {
         } else {
             console.log('URL has no hash; no access token');
         }
+    } else if (upTokenTime > tokenExpireSec) {
+        console.log("Getting a new acess token...Redirecting");
+
+        /* Remove session vars so we dont have to check in implicitGrantFlow */
+        sessionStorage.clear();
+
+        $(location).attr('href', 'index.html'); // Get another access token, redirect back.
+
     } else {
-        console.log("Access Token still valid and not NULL :)");
+        var timeLeft = (tokenExpireSec - upTokenTime);
+        console.log("Token still valid: " + Math.floor(timeLeft / 60) + " minutes left.");
     }
 
     if (access_token != null) {
@@ -191,7 +208,6 @@ function getUserTopTracks(time_range, offset, limit) {
 function getRecentlyListenedTracks(limit, after) {
 
     var tracks = []; // For the tracks.
-    console.log("Limit: " + limit + "\nAfter: " + after);
 
     $.get({
         url: 'https://api.spotify.com/v1/me/player/recently-played',
