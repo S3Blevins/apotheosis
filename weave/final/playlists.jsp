@@ -1,10 +1,10 @@
-<%-- 
+<%--
     Document   : playlists
     Created on : Nov 20, 2019, 5:51:47 PM
     Author     : damon
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!--<%@page contentType="text/html" pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,13 +86,13 @@
                     <a href="home.html"><span class="glyphicon glyphicon-home"></span>HOME</a>
                 </li>
                 <li>
-                    <a href="visualize.html"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
+                    <a href="visualize.jsp"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
                 </li>
                 <li id="active">
-                    <a href="playlists.html"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
+                    <a href="playlists.jsp"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
                 </li>
                 <li>
-                    <a href="settings.html"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
+                    <a href="settings.jsp"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
                 </li>
             </ul>
         </div>
