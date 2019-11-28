@@ -122,6 +122,7 @@ function getUserProfile() {
             'Authorization': 'Bearer ' + access_token
         },
         success: function (response) {
+            //console.log(response);
             var img = document.getElementById("userPicture");
             var loadImg = new Image;
             loadImg.onload = function () {
@@ -131,6 +132,13 @@ function getUserProfile() {
             /* Make the images section of the response an object */
             res = JSON.parse(JSON.stringify(response.images));
             loadImg.src = res[0].url;
+
+            /* Get the user's name and display it. */
+            if (response.display_name != null) {
+                document.getElementById("userName").innerHTML
+                                                    += response.display_name;
+            }
+
         },
         fail: function () {
             console.log("getUserProfile(): Failed to get user profile api response. ");
@@ -196,8 +204,9 @@ function getRecentlyListenedTracks(limit, after) {
         },
         success: function (response) {
             var artists = '';
+            var firstArtist = '';
 
-            //console.log(response);
+            console.log(response);
 
             /* Get the items from the response (The limit) tracks. */
             res = JSON.parse(JSON.stringify(response.items));
@@ -222,10 +231,24 @@ function getRecentlyListenedTracks(limit, after) {
                     }
                 }
 
-                /* Publish to home.html based on id of each element. */
-                document.getElementById("last5listened" + [i + 1]).innerHTML = res[i].track.name + " / " + artists;
+                /* Publish first artist(s) info next to the radar chart. */
+                if (i == 0) {
+                    document.getElementById("LPT").src
+                                        = res[i].track.album.images[1].url;
+                    document.getElementById("last-track-title").innerHTML
+                                        = res[i].track.name;
+                    document.getElementById("last-track-artist").innerHTML
+                                        += artists;
+                    document.getElementById("last-track-date").innerHTML
+                                        += res[i].track.album.release_date;
+                }
+
+                /* Publish to home.jsp based on id of each element. */
+                document.getElementById("last5listened" + [i + 1]).innerHTML
+                                        = res[i].track.name + " / " + artists;
                 artists = ''; // Clear string so other artist aren't copied.
             }
+
             /* Send first track to get its audio features. */
             getTrackAudioFeatures(tracks[0].track.id);
         },
@@ -288,13 +311,13 @@ function getTrackAudioFeatures(trackId) {
         },
         success: function (response) {
             /* These are the values that will be published on the radar chart. */
-            audioFeatures.push(response.danceability);
-            audioFeatures.push(response.energy);
-            audioFeatures.push(response.speechiness);
-            audioFeatures.push(response.acousticness);
-            audioFeatures.push(response.instrumentalness);
-            audioFeatures.push(response.liveness);
-            audioFeatures.push(response.valence);
+            audioFeatures.push(parseFloat(response.danceability).toFixed(2));
+            audioFeatures.push(parseFloat(response.energy).toFixed(2));
+            audioFeatures.push(parseFloat(response.speechiness).toFixed(2));
+            audioFeatures.push(parseFloat(response.acousticness).toFixed(2));
+            audioFeatures.push(parseFloat(response.instrumentalness).toFixed(2));
+            audioFeatures.push(parseFloat(response.liveness).toFixed(2));
+            audioFeatures.push(parseFloat(response.valence).toFixed(2));
             updateRadarChart(audioFeatures);
         },
         fail: function () {
