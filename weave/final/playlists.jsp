@@ -28,13 +28,14 @@
         }
     </style>
 
+    <!-- Call the js file here to link dependenccies. -->
+    <script src="yourPlaylists.js"></script>
 </head>
 
-<body>
+<body onload="callFunctions()">
 <!-- JavaScript Links need to be in the body (requires Jquery) -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-<script src="script.js"></script>
 <script src="menu.js"></script>
 
 <div class="site-nav">
@@ -107,18 +108,14 @@
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
             <h1>Your Playlists</h1>
-            <a href="#"><img class="playlist"></a>
-            <a href="#"><img class="playlist"></a>
-            <a href="#"><img class="playlist"></a>
+            <div class="pre-scrollable" id="YP">
+                <!-- Javascript generates this portion of the page. -->
+            </div>
         </div>
-
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
             <h1>Suggested Playlists by Spotify&copy;</h1>
-
             <div class="pre-scrollable">
-
-
                 <div class="col-xs-3 col-md-2">
                     <a href="#" class="thumbnail">
                         <img src="media/apotheosis_coverart.png" alt="...">
