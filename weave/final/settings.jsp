@@ -1,10 +1,3 @@
-<%--
-    Document   : settings
-    Created on : Nov 20, 2019, 5:52:20 PM
-    Author     : damon
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,6 +14,7 @@
 
     <!-- Our own CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="genre_album_flip.css">
 
     <style>
 
@@ -37,14 +31,39 @@
         border-radius: 80px;
       }
 
-      #footer {
-        height: 70px;
+      .genre {
+        background-size: 110px;
+        border: solid 5px #FFFFFF;
+        width: 110px;
+        height: 110px;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #1f2833;
+        box-shadow: 0px -5px 5px grey;
+        color: white;
+      }
+
+      .copyright {
+        text-align: center;
+        color: white;
+      }
+
+      #footer-links {
+          list-style-type: none;
+          text-decoration: none;
+          text-align: left;
       }
 
     </style>
   </head>
 
   <body>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
     <!-- JavaScript Links need to be in the body (requires Jquery) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -124,81 +143,67 @@
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
           <h1>genres and themes</h1>
-          <div class="pre-scrollable">
 
+          <div class="col-lg-8">
+            <form action="settingsServlet" method="post">
+              <input type="hidden" name="action" value="genre">
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="ROCK" style="background-image: url('media/genres/rock.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="RAP" style="background-image: url('media/genres/rap.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="POP" style="background-image: url('media/genres/pop.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="CLASSICAL" style="background-image: url('media/genres/classical.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="COUNTRY" style="background-image: url('media/genres/country.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="GRUNGE" style="background-image: url('media/genres/grunge.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="TRAP" style="background-image: url('media/genres/trap.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="TECHNO" style="background-image: url('media/genres/techno.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="OLDIES" style="background-image: url('media/genres/oldies.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="ELECTRONIC" style="background-image: url('media/genres/electronica.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="WORLD" style="background-image: url('media/genres/world.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+              <div class="col-xs-3 col-md-2">
+                <input class="genre" type="submit" name="button" value="METAL" style="background-image: url('media/genres/metal.jpeg');"/>
+              </div>
 
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="...">
-              </a>
-            </div>
+            </form>
           </div>
+
+          <div class="panel-body col-lg-4">
+            <c:forEach var="genre" items="${settings.genres}">
+              <p>${genre.name}</p>
+            </c:forEach>
+          </div>
+
 
           <div class="col-lg-6" style="background-color: #c7c7c7;">
             <h1>artists and albums</h1>
@@ -220,29 +225,59 @@
 
           <div class="col-lg-8" id="tags" style="background-color: #c7c7c7; padding-bottom: 10px;">
             <h1>moods or tags</h1>
-              <span class="tag">happy</span>
-              <span class="tag">upbeat</span>
-              <span class="tag">depressing</span>
-              <span class="tag">slow</span>
-              <span class="tag">fast</span>
-              <span class="tag">soothing</span>
-              <span class="tag">quiet</span>
-              <span class="tag">120bpm</span>
-              <span class="tag">sleep</span>
-              <span class="tag">exercise</span>
-              <span class="tag">driving</span>
-              <span class="tag">relaxation</span>
-              <span class="tag">...</span>
+            <form action="settingsServlet" method="post">
+              <input type="hidden" name="action" value="tag">
+              <input class="tag" type="submit" name="button" value="focus"/>
+              <input class="tag" type="submit" name="button" value="happy"/>
+              <input class="tag" type="submit" name="button" value="upbeat"/>
+              <input class="tag" type="submit" name="button" value="depressing"/>
+              <input class="tag" type="submit" name="button" value="slow"/>
+              <input class="tag" type="submit" name="button" value="fast"/>
+              <input class="tag" type="submit" name="button" value="soothing"/>
+              <input class="tag" type="submit" name="button" value="quiet"/>
+              <input class="tag" type="submit" name="button" value="120bmp"/>
+              <input class="tag" type="submit" name="button" value="sleep"/>
+              <input class="tag" type="submit" name="button" value="exercise"/>
+              <input class="tag" type="submit" name="button" value="driving"/>
+            </form>
           </div>
 
         </div>
 
-          <div class="col-lg-12" id="footer" style="background-color: #F5F5F5;">
-            <p></p>
+      </div>
+    </div>
+
+  </body>
+
+  <footer class="footer">
+    <div class="container overflow-auto">
+      <div class="row" style="margin-top: 40px;">
+          <div class="col-lg-4">
+            <p>Apotheosis is a music aggregation website taking your music from
+              Spotify© and displaying the different types of information available
+              on your music playing habits.</p>
+
+            <p>We can also make music suggestions right from out website!</p>
           </div>
 
+          <div class="col-lg-4" style="margin-left: 20px;">
+            <ul id="footer-links">
+              <li><a href="home.jsp">HOME</a></li>
+              <li><a href="visualize.jsp">VISUALIZE</a></li>
+              <li><a href="playlist.jsp">PLAYLISTS</a></li>
+              <li><a href="settings.jsp">SETTINGS</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4">
+          </div>
 
       </div>
     </div>
-  </body>
+
+      <div class="row" style="margin-top: 20px; background-color: #171e26; width:100%;">
+          <h4 class="copyright">© 2019 Apotheosis - NMT CSE321</h4>
+      </div>
+
+  </footer>
 </html>
