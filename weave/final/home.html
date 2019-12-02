@@ -118,8 +118,8 @@
         </div>
 
         <div class="col-lg-3 col-md-3">
-          <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
-          <a href="#" class="thumbnail">
+          <!-- The last track played cover art. -->
+          <a href="#" class="thumbnail" id="LPTA" target="_blank">
             <img src="media/apotheosis_coverart.png" alt="..." id="LPT">
           </a>
         </div>
@@ -133,89 +133,18 @@
           <!-- This is where the table is displayed -->
           <h2 id="last5listened">Last 5 Tracks Listened To:</h2>
           <div class="list-group" id="5TrackList">
-            <a id="last5listened1" href="#" class="list-group-item">Song/Artist</a>
-            <a id="last5listened2" href="#" class="list-group-item">Song/Artist</a>
-            <a id="last5listened3" href="#" class="list-group-item">Song/Artist</a>
-            <a id="last5listened4" href="#" class="list-group-item">Song/Artist</a>
-            <a id="last5listened5" href="#" class="list-group-item">Song/Artist</a>
+            <a id="last5listened1" href="#" class="list-group-item">Listen to more tracks!</a>
+            <a id="last5listened2" href="#" class="list-group-item">Listen to more tracks!</a>
+            <a id="last5listened3" href="#" class="list-group-item">Listen to more tracks!</a>
+            <a id="last5listened4" href="#" class="list-group-item">Listen to more tracks!</a>
+            <a id="last5listened5" href="#" class="list-group-item">Listen to more tracks!</a>
           </div>
         </div>
 
         <div class="col-lg-12" style="background-color: #c7c7c7; margin-top:30px; margin-bottom:30px;">
           <h1>Your Last Saved Tracks</h1>
-          <div class="pre-scrollable">
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM1">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM2">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM3">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM4">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM5">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM6">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM7">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM8">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM9">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM10">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM11">
-              </a>
-            </div>
-
-            <div class="col-xs-3 col-md-2">
-              <a href="#" class="thumbnail">
-                <img src="media/apotheosis_coverart.png" alt="..." id="YSM12">
-              </a>
-            </div>
+          <div class="pre-scrollable" id="YLST">
+              <!-- Track cover arts are populated here from the JS file. -->
           </div>
         </div>
 
@@ -223,6 +152,7 @@
           <div class="col-lg-3">
             <img src="media/apotheosis_coverart.png" alt="music" style="max-height:250px;">
           </div>
+          <br>
 
           <div class="col-lg-9">
             <div class="media">
@@ -233,7 +163,7 @@
               </div>
               <div class="media-body">
                 <h4 class="media-heading">How many tracks you have listened to today.</h4>
-                  <p id="numTracksToday"># tracks listened to today!!!</p>
+                  <div id="numTracksToday">You have listened to </div>
               </div>
             </div>
 
@@ -244,8 +174,11 @@
                 </a>
               </div>
               <div class="media-body">
-                <h4 class="media-heading">music news topic</h4>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                <h4 class="media-heading">Random Fact Based On Your Listening History</h4>
+                <div id="numMinutesToday">
+                    The longest possible eclipse of the sun is 7.31 minutes.
+                    This means based off your listening history today,
+                </div>
               </div>
             </div>
 
