@@ -6,22 +6,36 @@ var response_type_token = 'token';
 
 /* Time variables */
 const dateNowMS = new Date();  // Time (ms) since EPOCH.
+
+const startOfDayLocalMS = new Date().setHours(0, 0, 0, 0);
+const endOfDayLocalMS = new Date().setHours(23, 59, 59, 999);
 const secondsSinceEpoch = Math.round(dateNowMS.getTime() / 1000);
 
 const tokenSecOld = sessionStorage.getItem("tokenTimeStamp");
 const tokenExpireSec = sessionStorage.getItem("tokenExpireStamp");
-
 const upTokenTime = parseInt(tokenSecOld) + (secondsSinceEpoch - parseInt(tokenSecOld));
 
+/* getRecentlyListenedTracks() */
+var numTracksToday = 0;     // How many tracks have been listened to today.
+var secsListened = 0.0;    // How many seconds have been listened to today.
+var lastTrackListen = ''; // To have a ref to the last track.
+var lastRes;             // Hold reference to last response.
+var skip = 0;           // Will denote if the last pull was null or not.
+
 /* IF you ever get a 403 error, check to see if you provided the correct scopes below. */
-var scopes = 'user-read-private user-read-recently-played user-library-read user-top-read';// the scopes we are asking the user to agree to.
+/* The scopes we are asking the user to agree to. */
+var scopes = 'user-read-private ' +
+             'user-read-recently-played ' +
+             'user-library-read ' +
+             'user-top-read ' +
+             'playlist-read-private';
+
 var state = generateRandomString(16);
 var access_token = null;
 
 /**
  * Based on Implicit Grant Flow
  * TODO: Use a form possibly instead of GET request to construct url.
- * TODO: ASK ABOUT SERVER SIDE Access-Control-Allow-Origin error.
  */
 function implicitGrantFlow() {
 
@@ -40,9 +54,6 @@ function implicitGrantFlow() {
             url: auth_url,
             type: 'GET',
             contentType: 'application/json',
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            },
             data: {
                 client_id: client_id,
                 redirect_uri: redirect_uri,
@@ -104,7 +115,7 @@ function getAccessToken() {
         } else {
             console.log('URL has no hash; no access token');
         }
-    } else if (upTokenTime > tokenExpireSec) {
+    } else if (upTokenTime >= tokenExpireSec) {
         console.log("Getting a new acess token...Redirecting");
 
         /* Remove session vars so we dont have to check in implicitGrantFlow */
@@ -119,8 +130,9 @@ function getAccessToken() {
 
     if (access_token != null) {
         getUserProfile(); // To load the current user's picture.
-        getRecentlyListenedTracks(5); // To display the radar chart & last 5 tracks played.
-        getUserLibrary(12, 0); // To display last 10 saved tracks (coverart) on home page.
+        //getRecentlyListenedTracks(50); // To display the radar chart & see at least 50 tracks played.
+        getRecentlyListenedTracks(25, startOfDayLocalMS); // To display the radar chart & see at least 50 tracks played.
+        getUserLibrary(48, 0); // To display last 48 saved tracks (coverart) on home page.
     }
 }
 
@@ -215,70 +227,105 @@ function getRecentlyListenedTracks(limit, after) {
             'Authorization': 'Bearer ' + access_token
         },
         data: {
-            limit: limit, // How many tracks to show (50 max @ a time).
-            after: after //  UNIX timestamp in ms [All items after timestamp].
+            limit: 5,    // How many tracks to show (50 max @ a time).
+            after: after   // The tracks played after this EPOCH timestamp
         },
         success: function (response) {
+            //console.log(response);
             var artists = '';
             var firstArtist = '';
 
-            console.log(response);
+            if (response.items.length > 0) {
+                lastRes = response;
+            } else {
+                /* If the response was empty, we have nothing left to parse. */
+                skip = 1;
+            }
 
             /* Get the items from the response (The limit) tracks. */
-            res = JSON.parse(JSON.stringify(response.items));
+            res = JSON.parse(JSON.stringify(lastRes.items));
 
             /* Parse JSON to section off track name and artists.
                Update home.html with the results. */
-
-            for (i = 0; i < res.length; i++) {
-                tracks.push(res[i]);
-                for (j = 0; j < res[i].track.artists.length; j++) {
-                    /* Do not pout comma after last artist */
-                    if (res[i].track.artists.length == 1) {
-                        artists = artists.concat(res[i].track.artists[j].name);
-                    } else if (res[i].track.artists.length > 1) {
-                        if (j == res[i].track.artists.length - 1) {
+           if (skip == 0) {
+                for (i = 0; i < res.length; i++) {
+                    tracks.push(res[i]); // update tracks array.
+                    secsListened += res[i].track.duration_ms;
+                    for (j = 0; j < res[i].track.artists.length; j++) {
+                        /* Do not pout comma after last artist */
+                        if (res[i].track.artists.length == 1) {
                             artists = artists.concat(res[i].track.artists[j].name);
-                        } else if (j == res[i].track.artists.length - 2) {
-                            artists = artists.concat(res[i].track.artists[j].name + " and ");
-                        } else {
-                            artists = artists.concat(res[i].track.artists[j].name + ", ");
+                        } else if (res[i].track.artists.length > 1) {
+                            if (j == res[i].track.artists.length - 1) {
+                                artists = artists.concat(res[i].track.artists[j].name);
+                            } else if (j == res[i].track.artists.length - 2) {
+                                artists = artists.concat(res[i].track.artists[j].name + " and ");
+                            } else {
+                                artists = artists.concat(res[i].track.artists[j].name + ", ");
+                            }
                         }
                     }
-                }
 
-                /* Publish first artist(s) info next to the radar chart. */
-                if (i == 0) {
-                    document.getElementById("LPT").src
-                                        = res[i].track.album.images[1].url;
-                    document.getElementById("last-track-title").innerHTML
-                                        = res[i].track.name;
-                    document.getElementById("last-track-artist").innerHTML
-                                        += artists;
-                    document.getElementById("last-track-date").innerHTML
-                                        += res[i].track.album.release_date;
-                }
+                    /* Publish first artist(s) info next to the radar chart.
+                       The second check ensures we only publish the last
+                       fetch deatils and not mutliple images during each fetch. */
+                    if (i == 0) {
+                        lastTrackListen = res[i].track.id;
+                        document.getElementById("LPT").src
+                                            = res[i].track.album.images[1].url;
+                        document.getElementById("LPTA").href
+                                            = res[i].track.external_urls.spotify;
+                        document.getElementById("last-track-title").innerHTML
+                                            = res[i].track.name;
+                        document.getElementById("last-track-artist").innerHTML
+                                            += artists;
+                        document.getElementById("last-track-date").innerHTML
+                                            += res[i].track.album.release_date;
+                    }
 
-                /* Publish to home.jsp based on id of each element. */
-                document.getElementById("last5listened" + [i + 1]).innerHTML
-                                        = res[i].track.name + " / " + artists;
-                artists = ''; // Clear string so other artist aren't copied.
+                    /* Publish to home.jsp based on id of each element that are
+                       clickable and interactable. */
+                    if (i < 5) {
+                        document.getElementById("last5listened" + [i + 1]).innerHTML
+                                                = res[i].track.name + " / " + artists;
+                        document.getElementById("last5listened" + [i + 1]).target
+                                                = "_blank";
+                        document.getElementById("last5listened" + [i + 1]).href
+                                                = res[i].track.external_urls.spotify;
+                        artists = ''; // Clear string so other artist aren't copied.
+                    }
+                }
             }
 
-            /* Send first track to get its audio features. */
-            getTrackAudioFeatures(tracks[0].track.id);
+            /* We will make another check to see if the user listened to any
+               more tracks. */
+            if (response.items.length > 0) {
+                /* Update the number of tracks played today. */
+                numTracksToday += res.length;
+                getRecentlyListenedTracks(limit, response.cursors.after);
+            } else {
+                /* Send first track to get its audio features and publish
+                   Stats to home page. */
+                document.getElementById("numTracksToday").innerHTML += numTracksToday + " tracks today!!!";
+                var eclipseTime = 7.31;
+                document.getElementById("numMinutesToday").innerHTML +=
+                    (((secsListened / 1000) / 60) / eclipseTime).toFixed(1) +
+                    " longest eclipses have passed.";
+
+                getTrackAudioFeatures(lastTrackListen);
+            }
         },
-        fail: function () {
+        fail: function (error) {
             console.log("getRecentlyListenedTracks(): There are now tracks between these time periods or an error happened.");
         }
     });
 }
 
 /**
- * Function will get the user's library so we will get the latest 10 tracks from
+ * Function will get the user's library so we will get the latest 48 tracks from
  * the user to display their cover art on the home page.
- * @param limit Set to 12 now to display the latest 12 tracks.
- * @param offset Where to start our track offset in the library.
+ * @param {number} limit Set to 12 now to display the latest 12 tracks.
+ * @param {number} offset Where to start our track cursor in the library.
  */
 function getUserLibrary(limit, offset) {
 
@@ -294,15 +341,32 @@ function getUserLibrary(limit, offset) {
             offset: offset // Where to start in the user's library (0 = 1st track)
         },
         success: function (response) {
-
-            var i = 0;
-
+            //console.log(response);
             /* Get the items from the response (The limit) tracks. */
             res = JSON.parse(JSON.stringify(response.items));
 
-            for (; i < res.length; i++) {
-                /* Update the home page with coverart of latest tracks in library to each class name. */
-                document.getElementById("YSM" + (i + 1)).src = res[i].track.album.images[1].url;
+            /* Show all items from this pull of 50 playlists */
+            for (i = 0; i < res.length; i++) {
+                /* Need to create a new element every iteration. */
+                const aTag = document.createElement('a');
+                const divTag = document.createElement('div');
+                const imgTag = document.createElement('img');
+
+                /* Set static attributes. */
+                aTag.setAttribute('target', "_blank");
+                aTag.setAttribute('class', "thumbnail");
+                divTag.setAttribute('class', "col-xs-3 col-md-2");
+
+                /* Set dynamic attributes. */
+                /* Get url to redirect to. */
+                aTag.setAttribute('href', res[i].track.external_urls.spotify);
+                imgTag.setAttribute('src', res[i].track.album.images[0].url);
+                imgTag.setAttribute('alt', "media/apotheosis_coverart.png");
+
+                /* Populate div w/ playlists. */
+                aTag.appendChild(imgTag);
+                divTag.appendChild(aTag);
+                document.getElementById('YLST').appendChild(divTag);
             }
         },
         fail: function (res) {
@@ -314,7 +378,7 @@ function getUserLibrary(limit, offset) {
 /**
  * Function will get audio features for a track (danceability, valence, etc) to then
  * populate the radar graph on the home screen and be used for other applications.
- * @param trackId unique identifier created by Spotify used from JSON fetch.
+ * @param {string} trackId unique identifier created by Spotify used from JSON fetch.
  */
 function getTrackAudioFeatures(trackId) {
 
