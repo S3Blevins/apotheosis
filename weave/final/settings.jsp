@@ -18,7 +18,7 @@
 
     <style>
 
-      .tag {
+      .tagDisabled {
         background-color: gray;
         max-height: 250px;
         max-width: 100px;
@@ -31,13 +31,37 @@
         border-radius: 80px;
       }
 
-      .genre {
+      .tagEnabled {
+        background-color: #1f2833;
+        max-height: 250px;
+        max-width: 100px;
+        margin: 3px;
+        color: white;
+        padding: 10px 10px 10px 10px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 80px;
+      }
+
+      .genreDisabled {
         background-size: 110px;
-        border: solid 5px #FFFFFF;
+        border: solid 5px white;
         width: 110px;
         height: 110px;
         color: white;
         margin-bottom: 10px;
+      }
+
+      .genreEnabled {
+        background-size: 110px;
+        border: solid 5px white;
+        width: 110px;
+        height: 110px;
+        color: black;
+        margin-bottom: 10px;
+        background-color: black;
+        opacity: 0.3;
       }
 
       .footer {
@@ -61,9 +85,10 @@
     </style>
   </head>
 
-  <body>
+  <body onload="alreadySelectedGenre(); alreadySelectedTag();">
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+    <%@ taglib prefix="fn" uri="/WEB-INF/tlds/newtag_library.tld" %>
+    <%@ taglib prefix = "fx" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
     <!-- JavaScript Links need to be in the body (requires Jquery) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -117,16 +142,32 @@
         <div class="menu">
           <ul class="list-unstyled">
             <li>
-              <a href="home.html"><span class="glyphicon glyphicon-home"></span>HOME</a>
+              <form id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="home" />
+                  <span id="menu-icon" class="glyphicon glyphicon-home"></span>
+                  <input id="submit" type="submit" value="HOME"/>
+              </form>
             </li>
             <li>
-              <a href="visualize.jsp"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
+              <form id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="visualize" />
+                  <span id="menu-icon" class="glyphicon glyphicon-stats"></span>
+                  <input id="submit" type="submit" value="VISUALIZE"/>
+              </form>
             </li>
             <li>
-              <a href="playlists.jsp"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
+              <form id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="playlists" />
+                  <span id="menu-icon" class="glyphicon glyphicon-play-circle"></span>
+                  <input id="submit" type="submit" value="PLAYLISTS"/>
+              </form>
             </li>
-            <li id="active">
-              <a href="settings.jsp"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
+            <li>
+              <form class="active" id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="settings" />
+                  <span id="menu-icon" class="glyphicon glyphicon-cog"></span>
+                  <input id="submit" type="submit" value="SETTINGS"/>
+              </form>
             </li>
           </ul>
         </div>
@@ -145,65 +186,26 @@
           <h1>genres and themes</h1>
 
           <div class="col-lg-8">
-            <form action="settingsServlet" method="post">
-              <input type="hidden" name="action" value="genre">
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="ROCK" style="background-image: url('media/genres/rock.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="RAP" style="background-image: url('media/genres/rap.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="POP" style="background-image: url('media/genres/pop.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="CLASSICAL" style="background-image: url('media/genres/classical.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="COUNTRY" style="background-image: url('media/genres/country.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="GRUNGE" style="background-image: url('media/genres/grunge.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="TRAP" style="background-image: url('media/genres/trap.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="TECHNO" style="background-image: url('media/genres/techno.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="OLDIES" style="background-image: url('media/genres/oldies.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="ELECTRONIC" style="background-image: url('media/genres/electronica.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="WORLD" style="background-image: url('media/genres/world.jpeg');"/>
-              </div>
-
-              <div class="col-xs-3 col-md-2">
-                <input class="genre" type="submit" name="button" value="METAL" style="background-image: url('media/genres/metal.jpeg');"/>
-              </div>
-
-            </form>
+              
+              <c:forEach var="genre" items="${settings.genreList}">
+                <div class="col-xs-3 col-md-2">
+                  <img 
+                      <c:choose>
+                        <c:when test="${fn:contains(settings.genres, genre)}">
+                            class="genreEnabled"
+                        </c:when>
+                        <c:otherwise>
+                            class="genreDisabled"
+                        </c:otherwise>
+                        </c:choose>
+                      id="${genre}" src="media/genres/${fx:toLowerCase(genre)}.jpeg" onclick="selectedItem(this.id, 'genre')"/>
+                </div>
+              </c:forEach>
           </div>
 
-          <div class="panel-body col-lg-4">
-            <c:forEach var="genre" items="${settings.genres}">
-              <p>${genre.name}</p>
-            </c:forEach>
-          </div>
+          <div class="panel-body col-lg-4" id="genres">
 
+          </div>
 
           <div class="col-lg-6" style="background-color: #c7c7c7;">
             <h1>artists and albums</h1>
@@ -222,30 +224,107 @@
             </div>
           </div>
 
-
-          <div class="col-lg-8" id="tags" style="background-color: #c7c7c7; padding-bottom: 10px;">
+          <div class="col-lg-8" style="background-color: #c7c7c7; padding-bottom: 10px;">
             <h1>moods or tags</h1>
-            <form action="settingsServlet" method="post">
-              <input type="hidden" name="action" value="tag">
-              <input class="tag" type="submit" name="button" value="focus"/>
-              <input class="tag" type="submit" name="button" value="happy"/>
-              <input class="tag" type="submit" name="button" value="upbeat"/>
-              <input class="tag" type="submit" name="button" value="depressing"/>
-              <input class="tag" type="submit" name="button" value="slow"/>
-              <input class="tag" type="submit" name="button" value="fast"/>
-              <input class="tag" type="submit" name="button" value="soothing"/>
-              <input class="tag" type="submit" name="button" value="quiet"/>
-              <input class="tag" type="submit" name="button" value="120bmp"/>
-              <input class="tag" type="submit" name="button" value="sleep"/>
-              <input class="tag" type="submit" name="button" value="exercise"/>
-              <input class="tag" type="submit" name="button" value="driving"/>
-            </form>
+              <c:forEach var="tag" items="${settings.tagList}">
+                <span 
+                      <c:choose>
+                        <c:when test="${fn:contains(settings.tags, tag)}">
+                            class="tagEnabled"
+                        </c:when>
+                        <c:otherwise>
+                            class="tagDisabled"
+                        </c:otherwise>
+                        </c:choose>
+                      id="${tag}" onclick="selectedItem(this.id, 'tag')">${tag}</span>
+              </c:forEach>
+
+
           </div>
+
+          <div class="panel-body col-lg-4" id="tags">
+
+          </div>
+
+          <form action="settingsServlet" method="post">
+            <input type="hidden" name="action" value="save" />
+            <input type="hidden" name="tagArray" id="tagArray" value="" />
+            <input type="hidden" name="genreArray" id="genreArray" value="" />
+            <input type="hidden" name="userID" id="userID" value="" />
+            <input type="submit" name="button" value="SAVE SETTINGS"/>
+          </form>
 
         </div>
 
       </div>
     </div>
+
+
+    <script>
+      // acquire access token to behave as the index for our database.
+      var userID = sessionStorage.getItem("userID");
+      console.log(userID);
+      // array containing the genres wanted by the user
+      var userGenres = [];
+      // array containing the tags wanted by the user
+      var userTags = [];
+
+
+      function alreadySelectedGenre() {
+        var alreadyEnabledGenre = document.getElementsByClassName("genreEnabled");
+
+        for(var i = 0; i < alreadyEnabledGenre.length; i++) {
+          userGenres.push(alreadyEnabledGenre[i].id);
+        }
+
+        document.getElementById("genres").innerHTML = userGenres;
+      }
+
+      function alreadySelectedTag() {
+        var alreadyEnabledTag = document.getElementsByClassName("tagEnabled");
+
+        for(var i = 0; i < alreadyEnabledTag.length; i++) {
+          userTags.push(alreadyEnabledTag[i].id);
+        }
+
+        document.getElementById("tags").innerHTML = userTags;
+      }
+
+
+      function selectedItem(clickedID, type) {
+        var array;
+
+        // switch array based on what type so code can be reused
+        if(type == "genre") {
+          array = userGenres;
+        } else {
+          array = userTags;
+        }
+
+        // genreDisabled -> Not wanted by the user
+        // genreEnabled -> Wanted by the user and opacity CSS changed
+        if(document.getElementById(clickedID).className == type + "Disabled") {
+          // add the selected item to the list
+          array.push(clickedID);
+          // change the appearance of the selected genres
+          document.getElementById(clickedID).className =  type + "Enabled";
+          // alter the genre list on the side
+          document.getElementById(type + "s").innerHTML = array;
+        } else {
+          // remove the un-selected genre
+          array.splice(array.indexOf(clickedID), 1);
+          // change the appearance fot the unselected genres
+          document.getElementById(clickedID).className = type + "Disabled";
+          // alter the list on the side
+          document.getElementById(type + "s").innerHTML = array;
+        }
+        
+        document.getElementById("tagArray").value = userTags;
+        document.getElementById("genreArray").value = userGenres;
+        document.getElementById("userID").value = userID;
+      }
+    </script>
+
 
   </body>
 
@@ -262,10 +341,30 @@
 
           <div class="col-lg-4" style="margin-left: 20px;">
             <ul id="footer-links">
-              <li><a href="home.jsp">HOME</a></li>
-              <li><a href="visualize.jsp">VISUALIZE</a></li>
-              <li><a href="playlist.jsp">PLAYLISTS</a></li>
-              <li><a href="settings.jsp">SETTINGS</a></li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="home" />
+                      <input id="submit" type="submit" value="HOME"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="visualize" />
+                      <input id="submit" type="submit" value="VISUALIZE"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="playlists" />
+                      <input id="submit" type="submit" value="PLAYLISTS"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="settings" />
+                      <input id="submit" type="submit" value="SETTINGS"/>
+                  </form>
+                </li>
             </ul>
           </div>
 
@@ -276,7 +375,7 @@
     </div>
 
       <div class="row" style="margin-top: 20px; background-color: #171e26; width:100%;">
-          <h4 class="copyright">Â© 2019 Apotheosis - NMT CSE321</h4>
+          <h4 class="copyright">© 2019 Apotheosis - NMT CSE321</h4>
       </div>
 
   </footer>

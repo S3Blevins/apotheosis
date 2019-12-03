@@ -78,7 +78,7 @@ body {
 }
 
 /* adds padding to icons */
-.menu span {
+#menu-icon{
 	padding-right: 15px;
 }
 
@@ -88,9 +88,12 @@ body {
 }
 
 /* needed to apply everything under active */
-#active > * {
+.active > * {
 	color: #1f2833;
-	text-decoration: underline;
+}
+
+.active >  #submit {
+  	text-decoration: underline;
 }
 
 #userbar {
@@ -148,4 +151,46 @@ body {
     width: 30%;
     height: 200px;
     display: inline-block;
+}
+
+.footer {
+  width: 100%;
+  background-color: #1f2833;
+  box-shadow: 0px -5px 5px grey;
+  color: white;
+}
+
+.copyright {
+  text-align: center;
+  color: white;
+}
+
+#footer-links {
+    list-style-type: none;
+    text-decoration: none;
+    text-align: left;
+}
+
+/* USE BELOW FOR JSP FORM LINKS */
+
+#submit {
+  background:none;
+  border:none;
+}
+
+#option{
+
+  /* This affects the menu button text */
+  margin-left: 10px;
+  padding: 15px;
+
+  /* No underline under the tab texts */
+  color: grey;
+
+  font-size: 1.3em;
+  line-height: 1.7em;
+}
+
+#option:hover {
+  color: #E1E1E1;
 }

@@ -82,20 +82,36 @@
 
         <!-- Needs subclass otherwise there are javascript issues -->
         <div class="menu">
-            <ul class="list-unstyled">
-                <li>
-                    <a href="home.html"><span class="glyphicon glyphicon-home"></span>HOME</a>
-                </li>
-                <li>
-                    <a href="visualize.jsp"><span class="glyphicon glyphicon-stats"></span>VISUALIZE</a>
-                </li>
-                <li id="active">
-                    <a href="playlists.jsp"><span class="glyphicon glyphicon-play-circle"></span>PLAYLISTS</a>
-                </li>
-                <li>
-                    <a href="settings.jsp"><span class="glyphicon glyphicon-cog"></span>SETTINGS</a>
-                </li>
-            </ul>
+          <ul class="list-unstyled">
+            <li>
+              <form id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="home" />
+                  <span id="menu-icon" class="glyphicon glyphicon-home"></span>
+                  <input id="submit" type="submit" value="HOME"/>
+              </form>
+            </li>
+            <li>
+              <form id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="visualize" />
+                  <span id="menu-icon" class="glyphicon glyphicon-stats"></span>
+                  <input id="submit" type="submit" value="VISUALIZE"/>
+              </form>
+            </li>
+            <li>
+              <form class="active" id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="playlists" />
+                  <span id="menu-icon" class="glyphicon glyphicon-play-circle"></span>
+                  <input id="submit" type="submit" value="PLAYLISTS"/>
+              </form>
+            </li>
+            <li>
+              <form id="option" action="settingsServlet" method="post">
+                  <input type="hidden" name="action" value="settings" />
+                  <span id="menu-icon" class="glyphicon glyphicon-cog"></span>
+                  <input id="submit" type="submit" value="SETTINGS"/>
+              </form>
+            </li>
+          </ul>
         </div>
     </div>
 </div>
@@ -435,4 +451,57 @@
 </div>
 
 </body>
+
+  <footer class="footer">
+    <div class="container overflow-auto">
+      <div class="row" style="margin-top: 40px;">
+          <div class="col-lg-4">
+            <p>Apotheosis is a music aggregation website taking your music from
+              SpotifyÂ© and displaying the different types of information available
+              on your music playing habits.</p>
+
+            <p>We can also make music suggestions right from out website!</p>
+          </div>
+
+          <div class="col-lg-4" style="margin-left: 20px;">
+            <ul id="footer-links">
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="home" />
+                      <input id="submit" type="submit" value="HOME"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="visualize" />
+                      <input id="submit" type="submit" value="VISUALIZE"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="playlists" />
+                      <input id="submit" type="submit" value="PLAYLISTS"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="settings" />
+                      <input id="submit" type="submit" value="SETTINGS"/>
+                  </form>
+                </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4">
+          </div>
+
+      </div>
+    </div>
+
+      <div class="row" style="margin-top: 20px; background-color: #171e26; width:100%;">
+          <h4 class="copyright">© 2019 Apotheosis - NMT CSE321</h4>
+      </div>
+
+  </footer>
+
 </html>
