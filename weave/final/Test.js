@@ -19,7 +19,7 @@ const upTokenTime = parseInt(tokenSecOld) + (secondsSinceEpoch - parseInt(tokenS
 var numTracksToday = 0;     // How many tracks have been listened to today.
 var secsListened = 0.0;    // How many seconds have been listened to today.
 var lastTrackListen = []; // To have a ref to the last track.
-var lastRes = null       // Hold reference to last response.
+var lastRes = null;      // Hold reference to last response.
 var skip = 0;           // Will denote if the last pull was null or not.
 var artistsArray = []; //
 
@@ -131,7 +131,7 @@ function getAccessToken() {
 
     if (access_token != null) {
         getUserProfile(); // To load the current user's picture.
-        getRecentlyListenedTracks(5, startOfDayLocalMS); // To display the radar chart & see at least 50 tracks played.
+        getRecentlyListenedTracks(50, startOfDayLocalMS); // To display the radar chart & see at least 50 tracks played.
         getUserLibrary(48, 0); // To display last 48 saved tracks (coverart) on home page.
     }
 }
@@ -151,7 +151,7 @@ function getUserProfile() {
             'Authorization': 'Bearer ' + access_token
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             var img = document.getElementById("userPicture");
             var loadImg = new Image;
             loadImg.onload = function () {
@@ -161,6 +161,7 @@ function getUserProfile() {
             /* Make the images section of the response an object */
             res = JSON.parse(JSON.stringify(response.images));
 
+            /* Check to see if there is a user profile picture. */
             if(res.length > 0) {
                 loadImg.src = res[0].url;
             } else {
@@ -173,8 +174,9 @@ function getUserProfile() {
                 document.getElementById("userName").innerHTML
                                                     += response.display_name;
 
+            } else {
+                document.getElementById("userName").innerHTML += "User";
             }
-console.log(response.display_name);
 
             /* Get the user's unique ID to be used to store into database */
             sessionStorage.setItem("userID", response.id);
@@ -221,14 +223,17 @@ function getUserTopTracks(time_range, offset, limit) {
     });
 }
 
+// gmail: cse321spotify@gmail.com      password: cse321spotify()
+
 /**
  * Function gets the most recently listened to tracks and sections off the
  * name of the track and artist(s) which is published to home.html.
  * @param {number} limit The number of tracks we want to fetch at a time.
- * @param {number} before in ms, tracks before UNIX timestamp.
  * @param {number} after in ms, tracks after UNIX timestamp.
  */
 function getRecentlyListenedTracks(limit, after) {
+
+    noTracksPlayed = 0;
 
     $.get({
         url: 'https://api.spotify.com/v1/me/player/recently-played',
@@ -240,7 +245,7 @@ function getRecentlyListenedTracks(limit, after) {
             after: after   // The tracks played after this EPOCH timestamp
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             var artists = '';
             var firstArtist = '';
             var res;
@@ -254,10 +259,13 @@ function getRecentlyListenedTracks(limit, after) {
                 lastRes = response; // This means replace the whole old resp.
                 /* Get the items from the response (The limit) tracks. */
                 res = JSON.parse(JSON.stringify(lastRes.items));
+            } else if (response.items.length == 0 && lastRes == null) {
+                /* No tracks have been played today. */
+                skip = 1;
+                noTracksPlayed = 1;
             } else {
                 /* If the response was empty, we have nothing left to parse. */
                 skip = 1;
-                res = null;
             }
 
             /* Parse JSON to section off track name and artists.
@@ -303,8 +311,10 @@ function getRecentlyListenedTracks(limit, after) {
                         artists = ''; // Clear string so other artist aren't copied.
                     }
                 }
-            } else if (skip == 1 && (res != null || res != undefined)) {
-                console.log(res);
+            } else if (skip == 1 && noTracksPlayed == 0) {
+
+                res = JSON.parse(JSON.stringify(lastRes.items));
+
                 document.getElementById("LPT").src
                                     = res[0].track.album.images[1].url;
                 document.getElementById("LPTA").href
@@ -312,9 +322,9 @@ function getRecentlyListenedTracks(limit, after) {
                 document.getElementById("last-track-title").innerHTML
                                     = res[0].track.name;
                 document.getElementById("last-track-artist").innerHTML
-                                    = lastTrackListen[1];
+                                    += lastTrackListen[1];
                 document.getElementById("last-track-date").innerHTML
-                                    = res[0].track.album.release_date;
+                                    += res[0].track.album.release_date;
 
                 /*
                 for (i = 0; i < res.length; i++) {
@@ -389,29 +399,38 @@ function getUserLibrary(limit, offset) {
         success: function (response) {
             //console.log(response);
             /* Get the items from the response (The limit) tracks. */
-            res = JSON.parse(JSON.stringify(response.items));
 
-            /* Show all items from this pull of 50 playlists */
-            for (i = 0; i < res.length; i++) {
-                /* Need to create a new element every iteration. */
-                const aTag = document.createElement('a');
+            if (response.items.length > 0) {
+                res = JSON.parse(JSON.stringify(response.items));
+
+                /* Show all items from this pull of 50 playlists */
+                for (i = 0; i < res.length; i++) {
+                    /* Need to create a new element every iteration. */
+                    const aTag = document.createElement('a');
+                    const divTag = document.createElement('div');
+                    const imgTag = document.createElement('img');
+
+                    /* Set static attributes. */
+                    aTag.setAttribute('target', "_blank");
+                    aTag.setAttribute('class', "thumbnail");
+                    divTag.setAttribute('class', "col-xs-3 col-md-2");
+
+                    /* Set dynamic attributes. */
+                    /* Get url to redirect to. */
+                    aTag.setAttribute('href', res[i].track.external_urls.spotify);
+                    imgTag.setAttribute('src', res[i].track.album.images[0].url);
+                    imgTag.setAttribute('alt', "media/apotheosis_coverart.png");
+
+                    /* Populate div w/ playlists. */
+                    aTag.appendChild(imgTag);
+                    divTag.appendChild(aTag);
+                    document.getElementById('YLST').appendChild(divTag);
+                }
+            } else {
+
+                /* If no tracks saved, display a message. */
                 const divTag = document.createElement('div');
-                const imgTag = document.createElement('img');
-
-                /* Set static attributes. */
-                aTag.setAttribute('target', "_blank");
-                aTag.setAttribute('class', "thumbnail");
-                divTag.setAttribute('class', "col-xs-3 col-md-2");
-
-                /* Set dynamic attributes. */
-                /* Get url to redirect to. */
-                aTag.setAttribute('href', res[i].track.external_urls.spotify);
-                imgTag.setAttribute('src', res[i].track.album.images[0].url);
-                imgTag.setAttribute('alt', "media/apotheosis_coverart.png");
-
-                /* Populate div w/ playlists. */
-                aTag.appendChild(imgTag);
-                divTag.appendChild(aTag);
+                divTag.innerHTML = "You have no saved tracks, go add some!";
                 document.getElementById('YLST').appendChild(divTag);
             }
         },
