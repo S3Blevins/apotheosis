@@ -43,7 +43,7 @@ var chart = document.getElementById('LastListened').getContext('2d');
  * they listened to audio analysis.ac
  */
 
-function updateRadarChart(dataArray) {
+function updateRadarChart(dataArray, chartTitle) {
 
     var massPopChart = new Chart(chart, {
         type: 'radar', // bar, horizontal, pie, line, donut, radar, polar charts supported
@@ -63,6 +63,10 @@ function updateRadarChart(dataArray) {
             ]
         },
         options: {
+            title: {
+                display: true,
+                text: chartTitle
+           },
             scale: {
                 ticks: {
                     min: 0.0,
@@ -96,7 +100,7 @@ function updateRadarChart(dataArray) {
 }
 
 var chart2 = document.getElementById('genres').getContext('2d');
-function updateGenresChart(genresName, genresCount) {
+function updateGenresChart(genresName, genresCount, chartTitle) {
     var styleChart = new Chart(chart2, {
         type: 'bar', // bar, horizontal, pie, line, donut, radar, polar charts supported
         data: {
@@ -144,7 +148,7 @@ function updateGenresChart(genresName, genresCount) {
              legend: { display: false },
              title: {
                  display: true,
-                 text: 'Top Genres from All-Time Favorite Tracks'
+                 text: chartTitle
             },
             tooltips: {
                 enabled: true,
@@ -188,7 +192,7 @@ function updateGenresChart(genresName, genresCount) {
 }
 
 var chart3 = document.getElementById('moods').getContext('2d');
-function updateMoodsChart(trackValence) {
+function updateMoodsChart(trackValence, chartTitle) {
     var data = {
         //         100-90    89 - 70   69 - 50      49-30           29 - 11       10-0
         labels: ['Euphoric', 'Happy', 'Neutral', 'Discouraging', 'Depressing', 'You okay?'],
@@ -214,6 +218,10 @@ function updateMoodsChart(trackValence) {
         options: {
             responsive: true,
             //rotation: 0.8 * Math.PI, // Roatates the graph
+            title: {
+                display: true,
+                text: chartTitle
+           },
             tooltips: {
                 enabled: true,
                 callbacks: {
