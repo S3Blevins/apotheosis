@@ -43,11 +43,19 @@ function userTopTrack() {
             time_range: 'long_term' // long_term time range to get favorite track.
         },
         success: function (response) {
-            /* Get the items from the response (The limit) tracks. */
-            res = JSON.parse(JSON.stringify(response.items));
+            //console.log(response);
 
-            /* Get all the track details in the json */
-            getTrackAudioFeatures(res[0].id);
+            if (response.items.length > 0) {
+                /* Get the items from the response (The limit) tracks. */
+                res = JSON.parse(JSON.stringify(response.items));
+
+                /* Get all the track details in the json */
+                getTrackAudioFeatures(res[0].id, 0);
+            } else {
+                /* This user has not lsitened enough a really popular song. */
+                /* Post Malone - Circles popularity rating: 99/100*/
+                getTrackAudioFeatures("6WrI0LAC5M1Rw2MnX2ZvEg", 1);
+            }
         },
         fail: function () {
             console.log("getUserTopTracks(): api call failed!");
@@ -61,7 +69,14 @@ function userTopTrack() {
  * populate the radar graph on the home screen and be used for other applications.
  * @param trackId unique identifier created by Spotify used from JSON fetch.
  */
-function getTrackAudioFeatures(trackId) {
+function getTrackAudioFeatures(trackId, defaultSong) {
+
+    var chartTitle = "";
+    if (trackId == "6WrI0LAC5M1Rw2MnX2ZvEg" && defaultSong == 1) {
+            chartTitle = "You Don't Have a Favorite Track Yet, Here is a Popular Track's Audio Features.";
+    } else {
+        chartTitle = "Your All Time Favorite Track's Audio Features.";
+    }
 
     var audioFeatures = [];
 
@@ -79,7 +94,7 @@ function getTrackAudioFeatures(trackId) {
             audioFeatures.push(parseFloat(response.instrumentalness).toFixed(2));
             audioFeatures.push(parseFloat(response.liveness).toFixed(2));
             audioFeatures.push(parseFloat(response.valence).toFixed(2));
-            updateRadarChart(audioFeatures);
+            updateRadarChart(audioFeatures, chartTitle);
         },
         fail: function () {
             console.log("getTrackAudioFeatures() failed to get api data...");
@@ -102,22 +117,30 @@ function userTopGenres() {
         },
         success: function (response) {
             //console.log(response);
-            /* Get the items from the response (The limit) tracks. */
-            res = JSON.parse(JSON.stringify(response.items));
 
-            /* Get the artists ids (even multiple artist on a track). */
-            for (i = 0; i < res.length; i++) {
-                for (j = 0; j < res[i].artists.length; j++) {
-                    /* Spotify api limits 50 ids at a time. */
-                    if (artistIds.length == 50) {
-                        break;
+            /* If there the user hasnt listtened to enough tracks, statically
+               put some top genres. */
+            if (response.items.length > 0) {
+
+                /* Get the items from the response (The limit) tracks. */
+                res = JSON.parse(JSON.stringify(response.items));
+
+                /* Get the artists ids (even multiple artist on a track). */
+                for (i = 0; i < res.length; i++) {
+                    for (j = 0; j < res[i].artists.length; j++) {
+                        /* Spotify api limits 50 ids at a time. */
+                        if (artistIds.length == 50) {
+                            break;
+                        }
+
+                        artistIds.push(res[i].artists[j].id);
                     }
-
-                    artistIds.push(res[i].artists[j].id);
                 }
-            }
 
-            publishGenresChart(artistIds);
+                publishGenresChart(artistIds);
+            } else {
+                publishGenresChart("0");
+            }
         },
         fail: function () {
             console.log("getUserTopTracks(): api call failed!");
@@ -130,70 +153,80 @@ function publishGenresChart(artistIds) {
     var genres = []; // store an array of objects.
     var artistIdsString = ""; // The query constructed of artis ids.
     var j = 0;
+    var chartTitle = "";
 
-    /* populate id string for query */
-    for (i = 0; i < artistIds.length; i++) {
-        if (i + 1 === artistIds.length) {
-            artistIdsString += artistIds[i];
-        } else {
-            artistIdsString += artistIds[i] + ",";
+    if (artistIds != "0") {
+        /* populate id string for query */
+        for (i = 0; i < artistIds.length; i++) {
+            if (i + 1 === artistIds.length) {
+                artistIdsString += artistIds[i];
+            } else {
+                artistIdsString += artistIds[i] + ",";
+            }
         }
-    }
 
-    $.get({
-        url: 'https://api.spotify.com/v1/artists/',
-        headers: {
-            'Authorization': 'Bearer ' + access_token,
-        },
-        data: {
-            ids: artistIdsString
-        },
-        success: function (response) {
+        $.get({
+            url: 'https://api.spotify.com/v1/artists/',
+            headers: {
+                'Authorization': 'Bearer ' + access_token,
+            },
+            data: {
+                ids: artistIdsString
+            },
+            success: function (response) {
 
-            //console.log(response);
-            var res = JSON.parse(JSON.stringify(response.artists))
-            for (i = 0; i < res.length; i++) {
-                for (j = 0; j < res[i].genres.length; j++) {
+                //console.log(response);
+                var res = JSON.parse(JSON.stringify(response.artists))
+                for (i = 0; i < res.length; i++) {
+                    for (j = 0; j < res[i].genres.length; j++) {
 
-                    /* If the array is empty, no genre defined; skip */
-                    if (res[i].genres.length != 0) {
+                        /* If the array is empty, no genre defined; skip */
+                        if (res[i].genres.length != 0) {
 
-                        var newGenre = new Object();
-                        newGenre.name = res[i].genres[j];
-                        newGenre.count = 1;
-                        genres.push(newGenre);
+                            var newGenre = new Object();
+                            newGenre.name = res[i].genres[j];
+                            newGenre.count = 1;
+                            genres.push(newGenre);
+                        }
                     }
                 }
+
+                //console.log("genres array");
+                //console.log(genres);
+
+                genres.sort(function(a, b){
+                    return a.name === b.name ? 0 : a.name < b.name ? -1 : 1;
+                });
+
+                recheck(genres);
+
+                genres.sort(function(a, b){
+                    return a.count === b.count ? 0 : a.count < b.count ? -1 : 1;
+                }).reverse();
+
+                var genresName = [];
+                var genresCount = [];
+
+                for (i = 0; i < 12; i++) {
+                    genresName.push(genres[i].name);
+                    genresCount.push(genres[i].count);
+                }
+
+                chartTitle = "Top Genres from All-Time Favorite Tracks";
+                updateGenresChart(genresName, genresCount, chartTitle);
+
+            },
+            fail: function () {
+                console.log("getArtistsIdInformation api call failed!");
             }
-
-            //console.log("genres array");
-            //console.log(genres);
-
-            genres.sort(function(a, b){
-                return a.name === b.name ? 0 : a.name < b.name ? -1 : 1;
-            });
-
-            recheck(genres);
-
-            genres.sort(function(a, b){
-                return a.count === b.count ? 0 : a.count < b.count ? -1 : 1;
-            }).reverse();
-
-            var genresName = [];
-            var genresCount = [];
-
-            for (i = 0; i < 12; i++) {
-                genresName.push(genres[i].name);
-                genresCount.push(genres[i].count);
-            }
-
-            updateGenresChart(genresName, genresCount);
-
-        },
-        fail: function () {
-            console.log("getArtistsIdInformation api call failed!");
-        }
-    });
+        });
+    } else {
+        chartTitle = "You Don't Have Any Favorite Genres Yet, Here Are Some Popular Genres";
+        var genresStatic = ["Hip-Hop/Rap", "KPop", "Rock", "R&B", "Latin",
+                                            "Country", "EDM", "World", "Pop"];
+        var genresCount = [5.0, 5.0, 4.0, 4.0, 3.0, 3.0, 2.0, 2.0, 1.0];
+        updateGenresChart(genresStatic, genresCount, chartTitle);
+    }
 }
 
 
@@ -237,16 +270,26 @@ function userTopMood() {
         },
         success: function (response) {
             //console.log(response);
-            /* Get the items from the response (The limit) tracks. */
-            res = JSON.parse(JSON.stringify(response.items));
 
-            /* Get the artists ids (even multiple artist on a track). */
-            for (i = 0; i < res.length; i++) {
-                /* Spotify api limits 50 ids at a time. */
-                trackIds.push(res[i].id);
+            /* If the user hasnt listened to enough tracks to poulate this,
+               we will supply sample moods. */
+            if (response.items.length > 0) {
+                /* Get the items from the response (The limit) tracks. */
+                res = JSON.parse(JSON.stringify(response.items));
+
+                /* Get the artists ids (even multiple artist on a track). */
+                for (i = 0; i < res.length; i++) {
+                    /* Spotify api limits 50 ids at a time. */
+                    trackIds.push(res[i].id);
+                }
+
+                getValence(trackIds);
+            } else {
+                var sampleMoods = [12, 8, 10, 12, 5, 3];
+                var chartTitle = "You Don't Have Enough Tracks to Display" +
+                                " Your Top Moods, Here is a Sample";
+                updateMoodsChart(sampleMoods, chartTitle);
             }
-
-            getValence(trackIds);
         },
         fail: function () {
             console.log("getUserTopTracks(): api call failed!");
@@ -259,11 +302,12 @@ function getValence(trackIds) {
     var trackValence = [];        // The # of tracks that follow the filters.
     var trackIdsString = "";     // The query constructed of artis ids.
     var euphoric = 0;           // 100-90
-    var happy = 0;             //  89 - 70
+    var happy = 0;             // 89 - 70
     var neutral = 0;          // 69 - 50
     var discouraging = 0;    // 49-30
     var despressing = 0;    // 29 - 11
     var youOkay = 0;       // 10-0
+    var chartTitle = "Your All Time Favorite Tracks Moods";
 
     /* populate id string for query */
     for (i = 0; i < trackIds.length; i++) {
@@ -283,7 +327,7 @@ function getValence(trackIds) {
             ids: trackIdsString
         },
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             /* Get the items from the response (The limit) tracks. */
             res = JSON.parse(JSON.stringify(response.audio_features));
 
@@ -318,12 +362,10 @@ function getValence(trackIds) {
             trackValence.push(despressing);
             trackValence.push(youOkay);
 
-            updateMoodsChart(trackValence);
+            updateMoodsChart(trackValence, chartTitle);
         },
         fail: function () {
             console.log("getUserTopTracks(): api call failed!");
         }
     });
-
-
 }
