@@ -51,36 +51,45 @@ function getUserPlaylists(next, offset, limit) {
         success: function (response) {
             //console.log(response);
 
-            /* Get the items from the response (The limit) tracks. */
-            res = JSON.parse(JSON.stringify(response.items));
+            /* If there are saved playlists, show them */
+            if (response.items.length > 0) {
+                /* Get the items from the response (The limit) tracks. */
+                res = JSON.parse(JSON.stringify(response.items));
 
-            /* Show all items from this pull of 50 playlists */
-            for (i = 0; i < res.length; i++) {
+                /* Show all items from this pull of 50 playlists */
+                for (i = 0; i < res.length; i++) {
 
-                /* Need to create a new element every iteration. */
-                const aTag = document.createElement('a');
+                    /* Need to create a new element every iteration. */
+                    const aTag = document.createElement('a');
+                    const divTag = document.createElement('div');
+                    const imgTag = document.createElement('img');
+
+                    /* Set static attributes. */
+                    aTag.setAttribute('target', "_blank");
+                    aTag.setAttribute('class', "thumbnail");
+                    divTag.setAttribute('class', "col-xs-3 col-md-2");
+
+                    /* Set dynamic attributes. */
+                    /* Get url to redirect to. */
+                    aTag.setAttribute('href', res[i].external_urls.spotify);
+                    imgTag.setAttribute('src', res[i].images[0].url);
+
+                    /* Populate div w/ playlists. */
+                    aTag.appendChild(imgTag);
+                    divTag.appendChild(aTag);
+                    document.getElementById('YP').appendChild(divTag);
+                }
+
+                /* Make another api call since there are more playlists to fetch */
+                if (response.next != null) {
+                    getUserPlaylists(response.next, (offset + limit), limit);
+                }
+            } else {
+
+                /* If no playlists saved, display a message. */
                 const divTag = document.createElement('div');
-                const imgTag = document.createElement('img');
-
-                /* Set static attributes. */
-                aTag.setAttribute('target', "_blank");
-                aTag.setAttribute('class', "thumbnail");
-                divTag.setAttribute('class', "col-xs-3 col-md-2");
-
-                /* Set dynamic attributes. */
-                /* Get url to redirect to. */
-                aTag.setAttribute('href', res[i].external_urls.spotify);
-                imgTag.setAttribute('src', res[i].images[0].url);
-
-                /* Populate div w/ playlists. */
-                aTag.appendChild(imgTag);
-                divTag.appendChild(aTag);
+                divTag.innerHTML = "You have no saved playlists, go add some!";
                 document.getElementById('YP').appendChild(divTag);
-            }
-
-            /* Make another api call since there are more playlists to fetch */
-            if (response.next != null) {
-                getUserPlaylists(response.next, (offset + limit), limit);
             }
         },
         fail: function () {
