@@ -82,10 +82,27 @@
           text-align: left;
       }
 
+      #genreBlock {
+          position: relative;
+            width: 110px;
+            height: 110px;
+          text-align: center;
+                  margin-bottom: 10px;
+      }
+      
+      .genreText {
+          top: 50%;
+          left: 50%;
+          position: absolute;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-weight: bold;
+      }
+      
     </style>
   </head>
 
-  <body onload="alreadySelectedGenre(); alreadySelectedTag();">
+  <body onload="alreadySelectedGenre(); alreadySelectedTag(); hideSettings();">
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fn" uri="/WEB-INF/tlds/newtag_library.tld" %>
     <%@ taglib prefix = "fx" uri = "http://java.sun.com/jsp/jstl/functions" %>
@@ -100,7 +117,7 @@
       <!-- Blue navigation bar fixed to top when scrolling -->
       <nav class="navbar navbar-static-top" id="topbar">
 
-        <a class="navbar-brand" href="home.html">
+        <a class="navbar-brand" href="home.jsp">
           <img id="spin" style="max-height: 20px" alt="Apotheosis" src="media/logo_short_white.png" class="spin">
         </a>
 
@@ -163,11 +180,13 @@
               </form>
             </li>
             <li>
+            <div id="settingsLinkMenu">
               <form class="active" id="option" action="settingsServlet" method="post">
                   <input type="hidden" name="action" value="settings" />
                   <span id="menu-icon" class="glyphicon glyphicon-cog"></span>
                   <input id="submit" type="submit" value="SETTINGS"/>
               </form>
+            </div>
             </li>
           </ul>
         </div>
@@ -189,6 +208,7 @@
               
               <c:forEach var="genre" items="${settings.genreList}">
                 <div class="col-xs-3 col-md-2">
+                    <div id="genreBlock">
                   <img 
                       <c:choose>
                         <c:when test="${fn:contains(settings.genres, genre)}">
@@ -199,7 +219,12 @@
                         </c:otherwise>
                         </c:choose>
                       id="${genre}" src="media/genres/${fx:toLowerCase(genre)}.jpeg" onclick="selectedItem(this.id, 'genre')"/>
+                
+                  <div class="genreText">${genre}</div>
+                    </div>
                 </div>
+                
+                
               </c:forEach>
           </div>
 
@@ -323,6 +348,13 @@
         document.getElementById("genreArray").value = userGenres;
         document.getElementById("userID").value = userID;
       }
+      
+      function hideSettings () {
+          if(userID === null) {
+            document.getElementById("settingsLinkMenu").innerHTML = "";
+            document.getElementById("settingsLinkFooter").innerHTML = "";
+          }
+      }
     </script>
 
 
@@ -360,10 +392,12 @@
                   </form>
                 </li>
                 <li>
+                  <div id="settingsLinkFooter">
                   <form action="settingsServlet" method="post">
                       <input type="hidden" name="action" value="settings" />
                       <input id="submit" type="submit" value="SETTINGS"/>
                   </form>
+                  </div>
                 </li>
             </ul>
           </div>

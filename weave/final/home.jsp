@@ -29,7 +29,7 @@
     </style>
   </head>
 
-  <body onload="getAccessToken()">
+  <body onload="getAccessToken(); hideSettings();">
     <!-- JavaScript Links need to be in the body (requires Jquery) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
@@ -39,7 +39,7 @@
       <!-- Blue navigation bar fixed to top when scrolling -->
       <nav class="navbar navbar-static-top" id="topbar">
 
-        <a class="navbar-brand" href="home.html">
+        <a class="navbar-brand" href="home.jsp">
           <img id="spin" style="max-height: 20px" alt="Apotheosis" src="media/logo_short_white.png" class="spin">
         </a>
 
@@ -102,11 +102,13 @@
               </form>
             </li>
             <li>
-              <form id="option" action="settingsServlet" method="post">
-                  <input type="hidden" name="action" value="settings" />
-                  <span id="menu-icon" class="glyphicon glyphicon-cog"></span>
-                  <input id="submit" type="submit" value="SETTINGS"/>
-              </form>
+                <div id="settingsLinkMenu">
+                  <form id="option" action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="settings" />
+                      <span id="menu-icon" class="glyphicon glyphicon-cog"></span>
+                      <input id="submit" type="submit" value="SETTINGS"/>
+                  </form>
+                </div>
             </li>
           </ul>
         </div>
@@ -218,6 +220,16 @@
   </div>
 
   <script src="homeAPI.js"></script>
+    <script>
+        var userID = sessionStorage.getItem("userID");
+        function hideSettings () {
+            if(userID === null) {
+                document.getElementById("settingsLinkMenu").innerHTML = "";
+                document.getElementById("settingsLinkFooter").innerHTML = "";
+            }
+        }
+    </script>
+  
   </body>
 
     <footer class="footer">
@@ -252,10 +264,12 @@
               </form>
             </li>
             <li>
-              <form action="settingsServlet" method="post">
-                  <input type="hidden" name="action" value="settings" />
-                  <input id="submit" type="submit" value="SETTINGS"/>
-              </form>
+                <div id="settingsLinkFooter">
+                    <form action="settingsServlet" method="post">
+                        <input type="hidden" name="action" value="settings" />
+                        <input id="submit" type="submit" value="SETTINGS"/>
+                    </form>
+                </div>
             </li>
           </ul>
           </div>
