@@ -164,6 +164,7 @@
 
 
               </div>
+            </div>
 
           <script src="VisualizeCharts.js"></script>
           <script>
@@ -177,13 +178,13 @@
           </script>
 
   </body>
-  
-    <footer class="footer">
+
+  <footer class="footer">
     <div class="container overflow-auto">
       <div class="row" style="margin-top: 40px;">
           <div class="col-lg-4">
             <p>Apotheosis is a music aggregation website taking your music from
-              SpotifyÂ© and displaying the different types of information available
+              Spotify© and displaying the different types of information available
               on your music playing habits.</p>
 
             <p>We can also make music suggestions right from out website!</p>
@@ -210,13 +211,12 @@
                   </form>
                 </li>
                 <li>
-                    
-                    <div id="settingsLinkFooter">
-                        <form action="settingsServlet" method="post">
-                            <input type="hidden" name="action" value="settings" />
-                            <input id="submit" type="submit" value="SETTINGS"/>
-                        </form>
-                    </div>
+                  <div id="settingsLinkFooter">
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="settings" />
+                      <input id="submit" type="submit" value="SETTINGS"/>
+                  </form>
+                  </div>
                 </li>
             </ul>
           </div>
@@ -232,5 +232,5 @@
       </div>
 
   </footer>
-  
+
 </html>

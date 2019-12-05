@@ -89,7 +89,7 @@
           text-align: center;
                   margin-bottom: 10px;
       }
-      
+
       .genreText {
           top: 50%;
           left: 50%;
@@ -98,7 +98,7 @@
           color: white;
           font-weight: bold;
       }
-      
+
     </style>
   </head>
 
@@ -205,11 +205,11 @@
           <h1>genres and themes</h1>
 
           <div class="col-lg-8">
-              
+
               <c:forEach var="genre" items="${settings.genreList}">
                 <div class="col-xs-3 col-md-2">
                     <div id="genreBlock">
-                  <img 
+                  <img
                       <c:choose>
                         <c:when test="${fn:contains(settings.genres, genre)}">
                             class="genreEnabled"
@@ -219,12 +219,12 @@
                         </c:otherwise>
                         </c:choose>
                       id="${genre}" src="media/genres/${fx:toLowerCase(genre)}.jpeg" onclick="selectedItem(this.id, 'genre')"/>
-                
+
                   <div class="genreText">${genre}</div>
                     </div>
                 </div>
-                
-                
+
+
               </c:forEach>
           </div>
 
@@ -252,7 +252,7 @@
           <div class="col-lg-8" style="background-color: #c7c7c7; padding-bottom: 10px;">
             <h1>moods or tags</h1>
               <c:forEach var="tag" items="${settings.tagList}">
-                <span 
+                <span
                       <c:choose>
                         <c:when test="${fn:contains(settings.tags, tag)}">
                             class="tagEnabled"
@@ -343,12 +343,12 @@
           // alter the list on the side
           document.getElementById(type + "s").innerHTML = array;
         }
-        
+
         document.getElementById("tagArray").value = userTags;
         document.getElementById("genreArray").value = userGenres;
         document.getElementById("userID").value = userID;
       }
-      
+
       function hideSettings () {
           if(userID === null) {
             document.getElementById("settingsLinkMenu").innerHTML = "";
@@ -409,7 +409,7 @@
     </div>
 
       <div class="row" style="margin-top: 20px; background-color: #171e26; width:100%;">
-          <h4 class="copyright">© 2019 Apotheosis - NMT CSE321</h4>
+          <h4 class="copyright">Â© 2019 Apotheosis - NMT CSE321</h4>
       </div>
 
   </footer>
