@@ -29,14 +29,18 @@
     </style>
 
     <!-- Call the js file here to link dependenccies. -->
+
     <script src="yourPlaylists.js"></script>
 </head>
-
-<body onload="callFunctions(); hideSettings();">
+<!-- buildUserPrefrences needs to be called first to create parameters in call Functions -->
+<body onload="buildUserPreferences(); callFunctions(genreList, tagList); hideSettings();">
 <!-- JavaScript Links need to be in the body (requires Jquery) -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 <script src="menu.js"></script>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fx" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="site-nav">
     <!-- Blue navigation bar fixed to top when scrolling -->
@@ -48,10 +52,6 @@
 
         <a onclick="menuSlideOut()" class="navbar-brand">
             <span class="glyphicon glyphicon-align-left"></span>
-        </a>
-
-        <a class="navbar-brand" data-toggle="collapse" data-target="#userbar">
-            <span class="glyphicon glyphicon-user"></span>
         </a>
 
     </nav>
@@ -132,85 +132,15 @@
         </div>
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
-            <h1>Suggested Playlists by Spotify&copy;</h1>
-            <div class="pre-scrollable">
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
+            <h1>Spotify Playlists Suggested by Apotheosis:</h1>
+            <div class="pre-scrollable" id="SP">
+                <!-- Javascript generates this portion of the page. -->
             </div>
         </div>
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
             <h1>Suggested Playlists by Apotheosis</h1>
-            <div class="pre-scrollable">
+            <div class="pre-scrollable" >
 
 
                 <div class="col-xs-3 col-md-2">
@@ -454,12 +384,22 @@
 
           <script>
                 var userID = sessionStorage.getItem("userID");
+                var genreList;
+                var tagList;
                 function hideSettings () {
                     if(userID === null) {
                         document.getElementById("settingsLinkMenu").innerHTML = "";
                         document.getElementById("settingsLinkFooter").innerHTML = "";
                     }
                 }
+
+                function buildUserPreferences() {
+                    genreList=[<c:forEach var="genre" items="${settings.genres}">"${fx:toLowerCase(genre.name)}",</c:forEach>""];
+                    tagList=[<c:forEach var="tag" items="${settings.tags}">"${fx:toLowerCase(tag.name)}",</c:forEach>""];
+                    console.log(genreList);
+                    console.log(tagList);
+                }
+
           </script>
 
 </body>

@@ -67,82 +67,138 @@ public class settingsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        String userID = request.getParameter("userID");
         
-        //String driver = "org.mariadb.jdbc.Driver";
-        String driver = "com.mysql.jdbc.Driver";
+        String url = "/settings.jsp";
+        
+        String driver = "org.mariadb.jdbc.Driver";
+        //String driver = "com.mysql.jdbc.Driver";
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(settingsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //String dbURL = "jdbc:mariadb://localhost:3306/apollo5_sterling";
-        String dbURL = "jdbc:mysql://localhost:3306/apollo5_proj5";
+        //TODO: establish it so that the database is not opened unless they have a valid ID
+        
+        String dbURL = "jdbc:mariadb://localhost:3306/apollo5_proj5";
+        //String dbURL = "jdbc:mysql://localhost:3306/apollo5_proj5";
         String username = "apollo5";
         String password = "7533213352";
         java.sql.Connection connection;
-        
-        
-        
-        // TODO: this takes in the genre and then processes it.
-        // What needs to happen is either make a seprate condition for 'tag'
-        // or set it up so that the tag will be processed with the same code
-        // and just select which below with the boolean option in the UserSettings class. 
-        // I just didn't get around to it
-        String url = "/settings.jsp";
-        if (action.equals("genre")) {
-            String genreName = request.getParameter("button");
             
-            // get session settings object containing genres
-            HttpSession session = request.getSession();
-            UserSettings settings = (UserSettings) session.getAttribute("settings");
+        // get session settings object containing genres
+        HttpSession session = request.getSession();
+        UserSettings settings = (UserSettings) session.getAttribute("settings");
+
+        boolean newSettingsFlag = false;
+        // if it does not exist, create a new one
+        if(settings == null) {
+            settings = new UserSettings();
+            newSettingsFlag = true;
             
-            // if it does not exist, create a new one
-            if(settings == null) {
-                settings = new UserSettings();
-            }
+        }
+
+        try {
+            // initialize the connection for the database
+            connection = DriverManager.getConnection(dbURL, username, password);
+            java.sql.Statement statement = connection.createStatement();
             
-            // TODO: The current way things are set up is the settings is redirected
-            // each time a genre is saved. It needs to be set up so that the genres/tags
-            // are selected, use javascript to indicate it and when the user clicks save
-            // all of the selections are sent to the servlet and then saved into the database.
-            // The playlists should also change based on the updated settings.
-            
-            // TODO: what really needs to happen is when the user logs in, the 
-            // java classes are populated based on what is inside the database
-            try {
-                connection = DriverManager.getConnection(dbURL, username, password);
-                java.sql.Statement statement = connection.createStatement();
+            if(action.equals("home")) {
+                url = "/home.jsp";
+            } else if(action.equals("visualize")) {
+                url = "/visualize.jsp";
+            } else if((action.equals("settings") || action.equals("playlists")) && newSettingsFlag == true && userID != null) {
+                // Condition for if the user has just visited the site and no settings history is saved
+                // The objects used to create the playlists and preserve the settings in the settings
+                // page are built from the database.
                 
-                // check to see if the settings contains the genre, if it does, remove it
-                // otherwise add it to the settings list
-                if(settings.containsData(genreName, false)) {
-                    settings.removeData(genreName, false);
-                    String sqlQuery = "DELETE FROM `GENRE_TAG` WHERE G_NAME='" + genreName + "';";
-                    statement.executeUpdate(sqlQuery);
-                } else {
-                    int id = settings.addData(genreName, false);
-                    String sqlQuery = "INSERT INTO `GENRE_TAG` (`G_NAME`, `G_ID`) VALUES ('" + genreName + "', '" + id +"');";
-                    statement.executeUpdate(sqlQuery);
+                // query finds all rows associated with a user ID
+                String sqlFindQuery = "SELECT * FROM `SETTINGS` WHERE U_ID=" + userID + ";";
+                // query result set
+                ResultSet rs = statement.executeQuery(sqlFindQuery);
+                
+                // start to build settings session data from database
+                while(rs.next()) {
+                    String type = rs.getString("TYPE");
+                    if(type.equals("genre")) {
+                        settings.addGenre(rs.getString("QUALITY"), rs.getInt("ORDER"));
+                    } else if(type.equals("tag")) {
+                        settings.addTag(rs.getString("QUALITY"), rs.getInt("ORDER"));
+                    }
                 }
                 
-                // TODO: ultimately the adding to the database only works on one
-                // session, but the database is affected by all sessions which will
-                // mess up the database or causes errors becasue the table for UID
-                // Genre/name/etc needs to be used instead and we need to omit the settings
-                // page for non-users
+                // either settings.jsp or playlist.jsp
+                url = "/" + action + ".jsp";
+            } else if(action.equals("playlists")) {
+                // if settings are already preserved in playlist
+                url ="/playlists.jsp";
+            } else if(action.equals("save")) {
+                // Condition for if the user is now saving their updated settings
+                // The database is wiped of settings details and is rebuilt
+                String tagString = request.getParameter("tagArray");
+                String[] tagArray = tagString.split(",");
+
+                String genreString = request.getParameter("genreArray");
+                String[] genreArray = genreString.split(",");
+
+                System.out.println(tagString);
+                System.out.println(genreString);
                 
-                statement.close();
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(settingsServlet.class.getName()).log(Level.SEVERE, null, ex);
+                // More efficient to rebuild list from scratch than to change
+                // the preference order
+                settings.clearLists();
+                
+                // delete and insert is faster for SQL look-up than to update the tables
+                // only done if a valid user
+                if(userID != null) {
+                    String sqlDeleteQuery = "DELETE FROM `SETTINGS` WHERE U_ID='" + userID+ "';";
+                    statement.executeUpdate(sqlDeleteQuery);
+                }
+                
+                // initialized so that it doesn't keep getting garbage collected
+                String sqlUpdateQuery = "";
+                
+                for(int i = 0; i < genreArray.length; i++) {
+                    // add new genre to list
+                    settings.addGenre(genreArray[i], i);
+
+                    if(userID != null && genreArray[i] != null) {
+                        // write the new row to the database, but only if a valid user
+                        sqlUpdateQuery = "INSERT INTO SETTINGS " + "(`U_ID`, `TYPE`, `QUALITY`, `ORDER_NUM`) " + "VALUES ('" + userID + "', '" + "genre" + "', '" + genreArray[i] + "', '" + i + "');";
+                        System.out.println(sqlUpdateQuery);
+                        statement.executeUpdate(sqlUpdateQuery);
+                    }
+                }
+
+                for(int i = 0; i < tagArray.length; i++) {
+                    // add new tag to list
+                    settings.addTag(tagArray[i], i);
+
+                    // write the new row to the database, but only if a valid user
+                    if(userID != null && tagArray[i] != null) {
+                        sqlUpdateQuery = "INSERT INTO SETTINGS " + "(`U_ID`, `TYPE`, `QUALITY`, `ORDER_NUM`) " + "VALUES ('" + userID + "', '" + "tag" + "', '" + tagArray[i] + "', '" + i + "');";
+                        System.out.println(sqlUpdateQuery);
+                        statement.executeUpdate(sqlUpdateQuery);
+                    }
+                }
             }
+
+            // TODO make it so that the database connection is established when the user clicks playlist
+            System.out.println(settings.getGenreCount());
+            System.out.println(settings.getTagsCount());
             
-            // set the modified settings objecct back into the session
-            session.setAttribute("settings", settings);
-        
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(settingsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        // set the modified settings objecct back into the session
+        session.setAttribute("settings", settings);
         
+
+        // uses the url and forwards it, like a link
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
         

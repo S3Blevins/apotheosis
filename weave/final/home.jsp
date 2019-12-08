@@ -183,7 +183,7 @@
               </div>
               <div class="media-body">
                 <h4 class="media-heading">How many tracks you have listened to today.</h4>
-                  <p id="numTracksToday"># tracks listened to today!!!</p>
+                  <p id="numTracksToday">You have listened to </p>
               </div>
             </div>
 
@@ -229,7 +229,7 @@
             }
         }
     </script>
-  
+
   </body>
 
     <footer class="footer">

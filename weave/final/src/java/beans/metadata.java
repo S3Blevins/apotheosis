@@ -13,22 +13,18 @@ import java.io.Serializable;
  * @author sterling
  */
 public class metadata implements Serializable {
+    
     private String name;
-    private int id;
+    private int order;
     
     public metadata() {
         name = "";
-        id = 0;
-    }
-
-    public metadata(String name) {
-        this.name = name;
-        this.id= 0;
+        order = -1;
     }
     
-    public metadata(String name, int ID) {
-        this.name= name;
-        this.id =ID;
+    public metadata(String name, int order) {
+        this.name = name;
+        this.order = order;
     }
 
     public String getName() {
@@ -39,13 +35,12 @@ public class metadata implements Serializable {
         this.name = metaName;
     }
 
-    public int getID() {
-        return id;
+    public int getOrder() {
+        return order;
     }
 
-    public void setID(int metaID) {
-        this.id = metaID;
+    public void setOrder(int metaOrder) {
+        this.order = metaOrder;
     }
-    
     
 }

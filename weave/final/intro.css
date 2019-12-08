@@ -1,35 +1,23 @@
 body {
-	background-image: url("media/img.jpg");
-		background-size: 400%, 400%;
-	 background-repeat: no-repeat;
-
-	animation: shimmer 200s ease infinite;
+  background-image: url("media/img.jpg");
+  background-size: 400%, 400%;
+  background-repeat: no-repeat;
+  animation: shimmer 200s ease infinite;
 }
 
-	@keyframes shimmer {
-		 0%{background-position:0% 50%}
-		 50%{background-position:100% 50%}
-		 100%{background-position:0% 50%}
-	}
-
-.entry {
-	position: absolute;
-  top: 50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+@keyframes shimmer {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
+
 
 .intro {
-	position: absolute;
+  position: absolute;
   top: 30%;
-  left:50%;
-  transform: translate(-70%,50%);
-	transition: all .8s;
-	transition-timing: ease-in-out;
-}
-
-.intro:hover {
-
+  left: 50%;
+  transition: all .8s;
+  transition-timing: ease-in-out;
 }
 
 .intro:hover #logo-word{
@@ -40,9 +28,11 @@ body {
 
 .intro:hover #logo{
 	transform: rotate(360deg);
+        margin-left: -100px;
 }
 
 #logo {
+        margin-left: -27px;
 	transition: all .8s;
 	transition-timing: ease-in-out;
 }
@@ -54,12 +44,16 @@ body {
 	opacity:0;
 }
 
-.login-button {
+.intro-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+}
 
-  max-width: 250px;
-	margin:10px;
-
-  /* Wrap the image instead of having extra padding */
+.main-button {
+        max-width: 250px;
+        margin:10px;
 }
 
 #no-use-spotify:hover {

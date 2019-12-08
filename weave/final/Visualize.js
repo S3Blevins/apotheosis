@@ -317,7 +317,7 @@ function getValence(trackIds) {
             trackIdsString += trackIds[i] + ",";
         }
     }
-
+ 
     $.get({
         url: 'https://api.spotify.com/v1/audio-features',
         headers: {
@@ -327,7 +327,7 @@ function getValence(trackIds) {
             ids: trackIdsString
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             /* Get the items from the response (The limit) tracks. */
             res = JSON.parse(JSON.stringify(response.audio_features));
 
