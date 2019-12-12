@@ -1,38 +1,127 @@
-
+<!-- Contact Information -->
+<!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="stylesheet.css">
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="project.html">Project</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="about.html">About</a></li>
-    </ul>
-</head>
+  <head>
+    <title>Apotheosis - Group5</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="shortcut icon" type="image/png" href="media/favicon.ico"/>
 
-<body>
-    <h2>Contact page.</h2>
+    <div class="navigation">
+      <img class="logo" src="media/logo_long_white.png" alt="APOTHEOSIS">
 
-    <div class="Person1">
-        <p class="caption">
-            <img src="damon_contact_photo.jpg" alt="Damon">
-            Damon Estrada - A Senior at New Mexico Tech, Damon is interested in pursuing his Bachelors in Computer
-                        Science and is expected to graduate in the Spring of 2020. He wants to pursue Android
-                        development after he graduates. <br>
-                        Click <a href="https://www.cs.nmt.edu/~damon_estrada/" target="_blank">here</a> for his Resume.
-        </p>
+      <ul class="menu">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="project.html">PROJECT</a></li>
+        <li><a href="final.html">FINAL</a></li>
+        <li><a class="active" href="contact.html">CONTACT</a></li>
+      </ul>
     </div>
-    <div class="Person2">
-        <p class="caption">
-            <img src="placeholder.png" alt="Sterling">
-            Sterling Blevins - Bio goes here. <br>
-        </p>
+
+  </head>
+
+  <body>
+    <div class="text">
+
+      <h1>Contact page</h1>
+
+      <div class="Person">
+          <a href="https://github.com/damon-estrada"><img src="media/damon_contact_photo.jpg" alt="Damon"></a>
+          <table class="caption">
+            <tr>
+              <td><h2>Damon<br>Estrada</h2></td>
+            </tr>
+            <tr>
+              <td>- A Senior at New Mexico Tech, Damon is interested in pursuing his Bachelors in Computer
+                    Science and is expected to graduate in the Spring of 2020. He wants to pursue Android
+                    development after he graduates. <br><br>
+              </td>
+            </tr>
+
+            <tr>
+              <td>- Damon was in charge of handling most of the Spotify api calls. He integrated them
+                    through charts to show the user their listening habits, feeatures on user's favorite tracks
+                    and more. He was respondsible for integrating user authorization using OAuth 2.0 reccomending
+                    playlists based on user preferences and ensuring that the content provided by Spotify was
+                    within the guidelines specified by Spotify. <br><br>
+                    Click <a href="https://www.cs.nmt.edu/~damon_estrada/" target="_blank">here</a> for his Resume.
+              </td>
+            </tr>
+          </table>
+      </div>
+
+      <div class="Person">
+          <a href="https://github.com/s3blevins"><img src="media/sterling_contact_photo.jpg" alt="Sterling"></a>
+          <table class="caption">
+            <tr>
+              <td><h2>Sterling<br>Blevins</h2></td>
+            </tr>
+            <tr>
+              <td>- Also a senior at New Mexico Tech, Sterling spends his free-time playing with anything
+              electronics and computers. Expected to graduate in Spring of 2020, he will likely end up working with
+              software development and something technical. <br><br>
+              </td>
+            </tr>
+
+            <tr>
+              <td>- Sterling was in charge of implementing the controller in the MVC architecture.
+                    He also implemented the routines to interact with the database and store user information.
+                    He was also in charge of the front end development and integration of bootstrap.<br><br>
+              Click <a href="https://www.cs.nmt.edu/~sblevins/" target="_blank">here</a> for his Resume.
+              </td>
+            </tr>
+          </table>
+      </div>
+
+      <div class="Person">
+          <a href="https://github.com/master-root"><img src="media/sarah_contact_photo.jpg" alt="Sarah" href="https://github.com/master-root"></a>
+          <table class="caption">
+            <tr>
+              <td><h2>Sarah<br>Masters</h2></td>
+            </tr>
+            <tr>
+              <td>- Another senior at New Mexico Tech, Sarah is a valuable member of the Computer Science Department,
+              serving as a head grader, teacher's assistant, and tutor. Expected to graduate in the Spring of 2020, she
+              will pursue development of software.<br><br>
+              </td>
+            </tr>
+
+            <tr>
+              <td>- Sarah was in charge of implementing the footer of this website. <br><br>
+                    Click <a href="https://www.cs.nmt.edu/~smasters/" target="_blank">here</a> for her Resume.
+              </td>
+            </tr>
+          </table>
+      </div>
+
     </div>
-    <div class="Person1">
-        <p class="caption">
-            <img src="placeholder.png" alt="Sarah">
-            Sarah Masters - Bio goes here. <br>
-        </p>
-    </div>
-</body>
+
+    <footer>
+	    <center>
+	    <table class="footer_table">
+		<tr>
+			<th>
+				<div class="footer_text">Quick Links:</div>
+				<a class="f_link" href="index.html">HOME</a><br>
+				<a class="f_link" href="project.html">PROJECT</a><br>
+				<a class="f_link" href="final.html">FINAL</a><br>
+				<a class="f_link" href="contact.html">CONTACT</a><br>
+			</th>
+			<th><img class="footer_logo" src="media/logo_long_white.png" alt="APOTHEOSIS"></th>
+			<th>
+				<div class="footer_text">Contact Us:<br>
+				Damon Estreda: damon.estreda@student.nmt.edu<br>
+				Sterling Blevins: sterling.blevins@student.nmt.edu<br>
+				Sarah Masters: sarah.masters@student.nmt.edu<br></div>
+			</th>
+		</tr>
+
+		<tr class="footer_text">
+			<th></th>
+			<th>@2019 The Wonderous Avocados</th>
+			<th></th>
+		</tr>
+	    </table>
+	    </center>
+    </footer>
+  </body>
 </html>
