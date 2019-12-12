@@ -28,7 +28,9 @@ var scopes = 'user-read-private ' +
              'user-read-recently-played ' +
              'user-library-read ' +
              'user-top-read ' +
-             'playlist-read-private';
+             'playlist-read-private ' +
+             'playlist-modify-public ' +
+             'playlist-modify-private';
 
 var state = generateRandomString(16);
 var access_token = null;
@@ -180,6 +182,7 @@ function getUserProfile() {
 
             /* Get the user's unique ID to be used to store into database */
             sessionStorage.setItem("userID", response.id);
+            hideSettings(response.id);
 
         },
         fail: function () {
@@ -293,7 +296,7 @@ function getRecentlyListenedTracks(limit, after) {
                     artists = ''; // Clear string so other artist aren't copied.
                 }
             }
- 
+
             if (response.items.length > 0) {
 
                 document.getElementById("LPT").src
@@ -379,17 +382,20 @@ function getUserLibrary(limit, offset) {
                     const aTag = document.createElement('a');
                     const divTag = document.createElement('div');
                     const imgTag = document.createElement('img');
+                    const imgWrapper = document.createElement('div');
 
                     /* Set static attributes. */
                     aTag.setAttribute('target', "_blank");
                     aTag.setAttribute('class', "thumbnail");
                     divTag.setAttribute('class', "col-xs-3 col-md-2");
+                    imgWrapper.setAttribute('class', "album-art-size");
 
                     /* Set dynamic attributes. */
                     /* Get url to redirect to. */
                     aTag.setAttribute('href', res[i].track.external_urls.spotify);
                     imgTag.setAttribute('src', res[i].track.album.images[0].url);
                     imgTag.setAttribute('alt', "media/apotheosis_coverart.png");
+                    imgTag.setAttribute('id', "imgSize");
 
                     /* Populate div w/ playlists. */
                     aTag.appendChild(imgTag);
@@ -461,3 +467,27 @@ function generateRandomString(length) {
     }
     return text;
 }
+
+function hideSettings (userID) {
+  console.log(userID);
+    if(userID === null) {
+        document.getElementById("settingsLinkMenu").innerHTML = "";
+        document.getElementById("settingsLinkFooter").innerHTML = "";
+    }
+}
+
+  function musicFacts() {
+    var facts = [
+      "In 2016, Mozart Sold More CDs than Beyoncé",
+      "Musicians Have Shorter Life Spans Than the General Population",
+      "Singing in a Group Boosts Mood",
+      "Listening to Music Enhances Physical Performance",
+      "Finland Has the Most Metal Bands Per Capita",
+      "An Astronaut Released an Album with All Songs Recorded in Space",
+      "The British Navy Uses Britney Spears Songs to Scare Off Pirates",
+      "'Jingle Bells' Was Originally a Thanksgiving Song",
+      "The Most Expensive Musical Instrument Sold for $15.9 Million"]
+
+      var i = Math.floor(Math.random() * 10);
+      document.getElementById("fact").innerHTML = facts[i];
+    }

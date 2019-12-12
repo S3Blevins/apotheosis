@@ -52,10 +52,6 @@
           <span class="glyphicon glyphicon-align-left"></span>
         </a>
 
-        <a class="navbar-brand" data-toggle="collapse" data-target="#userbar">
-          <span class="glyphicon glyphicon-user"></span>
-        </a>
-
       </nav>
 
       <!-- user bar with user info, login/logout, etc -->
@@ -182,15 +178,15 @@
   <footer class="footer">
     <div class="container overflow-auto">
       <div class="row" style="margin-top: 40px;">
-          <div class="col-lg-4">
-            <p>Apotheosis is a music aggregation website taking your music from
-              Spotify© and displaying the different types of information available
-              on your music playing habits.</p>
+        <div class="col-lg-4">
+          <p>Apotheosis is a music aggregation website taking your music from
+            Spotify&copy; and displaying the different types of information available
+            on your music playing habits.</p>
 
-            <p>We can also make music suggestions right from out website!</p>
-          </div>
+          <p>We can also make music suggestions right from out website!</p>
+        </div>
 
-          <div class="col-lg-4" style="margin-left: 20px;">
+          <div class="col-lg-3 footer-spacing" style="margin-left: 20px;">
             <ul id="footer-links">
                 <li>
                   <form action="settingsServlet" method="post">
@@ -221,14 +217,15 @@
             </ul>
           </div>
 
-          <div class="col-lg-4">
+          <div class = "col-lg-4 footer-spacing">
+                <img style="max-height: 50px" src="media/logo_short_white.png">
+                <img style="max-height: 20px" src="media/word_long_white.png">
           </div>
-
       </div>
     </div>
 
       <div class="row" style="margin-top: 20px; background-color: #171e26; width:100%;">
-          <h4 class="copyright">© 2019 Apotheosis - NMT CSE321</h4>
+          <h4 class="copyright">&copy; 2019 Apotheosis - NMT CSE321</h4>
       </div>
 
   </footer>

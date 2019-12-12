@@ -26,10 +26,11 @@
       .media-object {
         max-height: 50px;
       }
+
     </style>
   </head>
 
-  <body onload="getAccessToken(); hideSettings();">
+  <body onload="getAccessToken(); musicFacts();">
     <!-- JavaScript Links need to be in the body (requires Jquery) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
@@ -47,9 +48,6 @@
           <span class="glyphicon glyphicon-align-left"></span>
         </a>
 
-        <a class="navbar-brand" data-toggle="collapse" data-target="#userbar">
-          <span class="glyphicon glyphicon-user"></span>
-        </a>
 
       </nav>
 
@@ -115,8 +113,8 @@
       </div>
     </div>
 
-  <div class="container overflow-auto" style="margin-bottom: 70px;">
-      <div class="row" style="margin-top: 40px;">
+  <div class="container">
+      <div class="row">
 
         <div class="col-lg-12 jumbotron">
           <div class="col-lg-8">
@@ -132,23 +130,26 @@
           </div>
         </div>
 
+        <div class="recents">
         <div class="col-lg-6 col-md-3">
           <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
           <h2>Listening Habits:</h2>
           <canvas class="chart" id="LastListened"></canvas>
         </div>
 
-        <div class="col-lg-3 col-md-3">
-          <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
-          <a href="#" class="thumbnail" id="LPTA" target="_blank">
-            <img src="media/apotheosis_coverart.png" alt="..." id="LPT">
-          </a>
-        </div>
-        <div class="col-lg-3">
-          <h2 id="last-track-title">TITLE</h2>
-          <p id="last-track-artist">Artist: </p>
-          <p id="last-track-date">Released: </p>
-        </div>
+          <div class="col-lg-3 col-md-3">
+            <!-- This is where the radar chart is displayed and created (external script file: LastListened.js) -->
+            <a href="#" class="thumbnail" id="LPTA" target="_blank" style="margin-top:40px;">
+              <img src="media/apotheosis_coverart.png" alt="..." id="LPT">
+            </a>
+          </div>
+
+          <div class="col-lg-3" style="margin-top:15px;">
+                <h2 id="last-track-title">TITLE</h2>
+                <p id="last-track-artist">Artist: </p>
+                <p id="last-track-date">Released: </p>
+          </div>
+      </div>
 
         <div class="col-lg-12 col-md-6">
           <!-- This is where the table is displayed -->
@@ -209,79 +210,72 @@
                 </a>
               </div>
               <div class="media-body">
-                <h4 class="media-heading">music news topic</h4>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                <h4 class="media-heading">Music facts!</h4>
+                <p id="fact">Log in to check out various music facts! Updated all the time!</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <script></script>
   </div>
 
   <script src="homeAPI.js"></script>
-    <script>
-        var userID = sessionStorage.getItem("userID");
-        function hideSettings () {
-            if(userID === null) {
-                document.getElementById("settingsLinkMenu").innerHTML = "";
-                document.getElementById("settingsLinkFooter").innerHTML = "";
-            }
-        }
-    </script>
 
   </body>
 
     <footer class="footer">
     <div class="container overflow-auto">
       <div class="row" style="margin-top: 40px;">
-          <div class="col-lg-4">
-            <p>Apotheosis is a music aggregation website taking your music from
-              Spotify© and displaying the different types of information available
-              on your music playing habits.</p>
 
-            <p>We can also make music suggestions right from out website!</p>
+        <div class="col-lg-4">
+          <p>Apotheosis is a music aggregation website taking your music from
+            Spotify&copy; and displaying the different types of information available
+            on your music playing habits.</p>
+
+          <p>We can also make music suggestions right from out website!</p>
+        </div>
+
+          <div class="col-lg-3 footer-spacing" style="margin-left: 20px;">
+            <ul id="footer-links">
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="home" />
+                      <input id="submit" type="submit" value="HOME"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="visualize" />
+                      <input id="submit" type="submit" value="VISUALIZE"/>
+                  </form>
+                </li>
+                <li>
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="playlists" />
+                      <input id="submit" type="submit" value="PLAYLISTS"/>
+                  </form>
+                </li>
+                <li>
+                  <div id="settingsLinkFooter">
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="settings" />
+                      <input id="submit" type="submit" value="SETTINGS"/>
+                  </form>
+                  </div>
+                </li>
+            </ul>
           </div>
 
-          <div class="col-lg-4" style="margin-left: 20px;">
-          <ul id="footer-links">
-            <li>
-              <form action="settingsServlet" method="post">
-                  <input type="hidden" name="action" value="home" />
-                  <input id="submit" type="submit" value="HOME"/>
-              </form>
-            </li>
-            <li>
-              <form action="settingsServlet" method="post">
-                  <input type="hidden" name="action" value="visualize" />
-                  <input id="submit" type="submit" value="VISUALIZE"/>
-              </form>
-            </li>
-            <li>
-              <form action="settingsServlet" method="post">
-                  <input type="hidden" name="action" value="playlists" />
-                  <input id="submit" type="submit" value="PLAYLISTS"/>
-              </form>
-            </li>
-            <li>
-                <div id="settingsLinkFooter">
-                    <form action="settingsServlet" method="post">
-                        <input type="hidden" name="action" value="settings" />
-                        <input id="submit" type="submit" value="SETTINGS"/>
-                    </form>
-                </div>
-            </li>
-          </ul>
-          </div>
-
-          <div class="col-lg-4">
+          <div class = "col-lg-4 footer-spacing">
+                <img style="max-height: 50px" src="media/logo_short_white.png">
+                <img style="max-height: 20px" src="media/word_long_white.png">
           </div>
 
       </div>
     </div>
 
       <div class="row" style="margin-top: 20px; background-color: #171e26; width:100%;">
-          <h4 class="copyright">© 2019 Apotheosis - NMT CSE321</h4>
+          <h4 class="copyright">&copy; 2019 Apotheosis - NMT CSE321</h4>
       </div>
 
   </footer>

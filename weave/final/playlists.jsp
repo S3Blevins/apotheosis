@@ -140,7 +140,7 @@
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
             <h1>Suggested Playlists by Apotheosis</h1>
-            <div class="pre-scrollable" >
+            <div class="pre-scrollable" id="SPBA">
 
 
                 <div class="col-xs-3 col-md-2">
@@ -149,229 +149,19 @@
                     </a>
                 </div>
 
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
             </div>
         </div>
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
             <h1>Artist you may like:</h1>
-            <div class="pre-scrollable">
-
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
+            <div class="pre-scrollable" id="AYML">
             </div>
         </div>
 
         <div class="col-lg-12" style="background-color: #c7c7c7;">
             <h1>Explore Popular Music in your Region</h1>
-            <div class="pre-scrollable">
-
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
-
-                <div class="col-xs-3 col-md-2">
-                    <a href="#" class="thumbnail">
-                        <img src="media/apotheosis_coverart.png" alt="...">
-                    </a>
-                </div>
+            <div class="pre-scrollable" id="MIYR">
+                <!-- Javascript generates this portion of the page. -->
             </div>
         </div>
 
@@ -407,15 +197,15 @@
   <footer class="footer">
     <div class="container overflow-auto">
       <div class="row" style="margin-top: 40px;">
-          <div class="col-lg-4">
-            <p>Apotheosis is a music aggregation website taking your music from
-              SpotifyÂ© and displaying the different types of information available
-              on your music playing habits.</p>
+        <div class="col-lg-4">
+          <p>Apotheosis is a music aggregation website taking your music from
+            Spotify&copy; and displaying the different types of information available
+            on your music playing habits.</p>
 
-            <p>We can also make music suggestions right from out website!</p>
-          </div>
+          <p>We can also make music suggestions right from out website!</p>
+        </div>
 
-          <div class="col-lg-4" style="margin-left: 20px;">
+          <div class="col-lg-3 footer-spacing" style="margin-left: 20px;">
             <ul id="footer-links">
                 <li>
                   <form action="settingsServlet" method="post">
@@ -436,17 +226,19 @@
                   </form>
                 </li>
                 <li>
-                    <div id="settingsLinkFooter">
-                        <form action="settingsServlet" method="post">
-                            <input type="hidden" name="action" value="settings" />
-                            <input id="submit" type="submit" value="SETTINGS"/>
-                        </form>
-                    </div>
+                  <div id="settingsLinkFooter">
+                  <form action="settingsServlet" method="post">
+                      <input type="hidden" name="action" value="settings" />
+                      <input id="submit" type="submit" value="SETTINGS"/>
+                  </form>
+                  </div>
                 </li>
             </ul>
           </div>
 
-          <div class="col-lg-4">
+          <div class = "col-lg-4 footer-spacing">
+                <img style="max-height: 50px" src="media/logo_short_white.png">
+                <img style="max-height: 20px" src="media/word_long_white.png">
           </div>
 
       </div>
