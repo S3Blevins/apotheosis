@@ -143,6 +143,29 @@ The tables below show the contents of the tables, primary keys, data types, fore
 
 \includegraphics[scale=0.85,left]{er_tables/playlist_track.PNG}
 
+
+\section*{System Architecture}
+
+\includegraphics[scale=0.64,left]{mvc.png}
+
+The system architecture works as follows.
+\begin{itemize}
+    \item The user navigates to our website and is prompted by our logo and name of our website.
+    \item All our Views include (home.jsp, visualize.jsp, playlists.jsp, settings.jsp).
+    \item We have one controller that is called settingsServlet that has a class called UserSettings that holds all the attributes needed.
+    \item Our model consists of (User, Settings).
+    \item Upon signing into Spotify, the user is redirected to home.jsp.
+    \item When the user wants to navigate to another page, the servlet or controller (settingsServlet) is used to navigate between pages and transfer any vital information a page is dependent on.
+    \item Before Playlists.jsp can be populated with recommended content, the user must visit settings.jsp to save some preferences that they like. Once this happens, the controller will make a database query to store these user preferences.
+    \item At any time, the user can update their preferences by revisiting the settings page and updating their updated preferences.
+    \item Once this happens, playlists.jsp will utilize the preferences saved to recommend playlists from the information passed by the controller.
+\end{itemize}
+
+
+
+
+
+
 \section*{References}
 
 \noindent
