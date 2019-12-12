@@ -1,0 +1,63 @@
+Apollo 5 "Apotheosis" application
+
+Please follow the steps below to get the best experience out of our website.
+
+1) Always have your browser window in the maximum resolution for the best experience.
+
+When on the website login page, click "Connect With Spotify". You can use your
+own account or please use the provided community login.
+
+Username(email): cse321spotify@gmail.com password: cse321spotify()
+
+PLEASE DO NOT BE MEAN AND CHANGE THE PASSWORD.
+
+If you chose to use your own login, you will be required to accept the scopes
+we are asking to view (these are just your listening history habits). Once
+you accept, you will be sent to the home page where you will be prompted with
+details about yourself and tracks you've listened to.
+
+--------
+| HOME |
+--------
+Here you can view your latest saved tracks. All cover art items are clickable
+and will redirect you to the track on Spotify. The radar cart is interactive
+meaning you can hover your mouse or click a dot and see what each parameter
+indicates. The Last 5 tracks listened to portion is clickable and will do the
+same operation as the cover arts.
+
+At any time, you may click on the top left corner on our logo to be redirected
+to the home page. If you want to navigate to new pages, click the three
+horizontal lines to chose where to go to next. The person icon is for future
+implementations.
+
+-------------
+| Visualize |
+-------------
+Visualize is where the user can see even more detailed information about
+their listening habbits. Here you can see your all time favorite track
+audio features, your favorite genres and your top 50 tracks moods. All graphs
+are have tooltips which means it will show you what each graphical parameter
+means. Note: Style and Beat and Frequency of listening are not updated but
+show what it will look like.
+
+------------
+| Settings |
+------------
+The 'Settings' page functions as the user input component of the MVC architecture.
+Selecting any of the genres or tags will highlight the applicable buttons,
+and indicate what has been selected on the side. By clicking Save Settings, the
+settings will be sent to the servlet controller, and stored into the database.
+When user logs back in, the settings are retained by the session, and if not,
+the database is polled for any relevant data and the settings session is
+updated accordingly. The settings will be used to pull and generate playlists
+from Spotify on the 'Playlist' page that will match the desired tags/genres.
+
+-------------
+| Playlists |
+-------------
+Playlists is where the user can see the playlist they have saved. Again the
+playlists are links and will redirect the user to the playlist. Suggested Playlists
+by Spotify, Suggested Playlists by Apotheosis, Artist you may like and
+Explore Popular Music in your Region are not updated yet but will be.
+
+Website Link: https://weave.cs.nmt.edu/apollo5/final/index.html

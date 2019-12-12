@@ -21,7 +21,7 @@
       .tagDisabled {
         background-color: gray;
         max-height: 250px;
-        max-width: 100px;
+        max-width: 250px;
         margin: 3px;
         color: white;
         padding: 10px 10px 10px 10px;
@@ -34,7 +34,7 @@
       .tagEnabled {
         background-color: #1f2833;
         max-height: 250px;
-        max-width: 100px;
+        max-width: 250px;
         margin: 3px;
         color: white;
         padding: 10px 10px 10px 10px;
@@ -84,10 +84,10 @@
 
       #genreBlock {
           position: relative;
-            width: 110px;
-            height: 110px;
+          width: 110px;
+          height: 110px;
           text-align: center;
-                  margin-bottom: 10px;
+          margin-bottom: 10px;
       }
 
       .genreText {
@@ -125,9 +125,6 @@
           <span class="glyphicon glyphicon-align-left"></span>
         </a>
 
-        <a class="navbar-brand" data-toggle="collapse" data-target="#userbar">
-          <span class="glyphicon glyphicon-user"></span>
-        </a>
 
       </nav>
 
@@ -232,22 +229,7 @@
 
           </div>
 
-          <div class="col-lg-6" style="background-color: #c7c7c7;">
-            <h1>artists and albums</h1>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for artists and albums...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">search</button>
-              </span>
-            </div>
 
-            <div class="panel panel-default">
-              <div class="panel-heading">Artists and Albums</div>
-              <div class="panel-body">
-                <p>List a series of artists or albums related to search results</p>
-              </div>
-            </div>
-          </div>
 
           <div class="col-lg-8" style="background-color: #c7c7c7; padding-bottom: 10px;">
             <h1>moods or tags</h1>
@@ -263,21 +245,22 @@
                         </c:choose>
                       id="${tag}" onclick="selectedItem(this.id, 'tag')">${tag}</span>
               </c:forEach>
+            </div>
 
 
+            <div class="panel-body col-lg-4" id="tags"></div>
+
+            <div class="col-lg-12">
+              <form action="settingsServlet" method="post">
+                <input type="hidden" name="action" value="save" />
+                <input type="hidden" name="tagArray" id="tagArray" value="" />
+                <input type="hidden" name="genreArray" id="genreArray" value="" />
+                <input type="hidden" name="userID" id="userID" value="" />
+                <input type="submit" name="button" value="SAVE SETTINGS" style="margin-top: 30px; margin-bottom: 70px;"/>
+              </form>
+
+            </div>
           </div>
-
-          <div class="panel-body col-lg-4" id="tags">
-
-          </div>
-
-          <form action="settingsServlet" method="post">
-            <input type="hidden" name="action" value="save" />
-            <input type="hidden" name="tagArray" id="tagArray" value="" />
-            <input type="hidden" name="genreArray" id="genreArray" value="" />
-            <input type="hidden" name="userID" id="userID" value="" />
-            <input type="submit" name="button" value="SAVE SETTINGS"/>
-          </form>
 
         </div>
 
@@ -363,15 +346,16 @@
   <footer class="footer">
     <div class="container overflow-auto">
       <div class="row" style="margin-top: 40px;">
-          <div class="col-lg-4">
-            <p>Apotheosis is a music aggregation website taking your music from
-              Spotify© and displaying the different types of information available
-              on your music playing habits.</p>
 
-            <p>We can also make music suggestions right from out website!</p>
-          </div>
+        <div class="col-lg-4">
+          <p>Apotheosis is a music aggregation website taking your music from
+            Spotify&copy; and displaying the different types of information available
+            on your music playing habits.</p>
 
-          <div class="col-lg-4" style="margin-left: 20px;">
+          <p>We can also make music suggestions right from out website!</p>
+        </div>
+
+          <div class="col-lg-3 footer-spacing" style="margin-left: 20px;">
             <ul id="footer-links">
                 <li>
                   <form action="settingsServlet" method="post">
@@ -402,14 +386,16 @@
             </ul>
           </div>
 
-          <div class="col-lg-4">
+          <div class = "col-lg-4 footer-spacing">
+                <img style="max-height: 50px" src="media/logo_short_white.png">
+                <img style="max-height: 20px" src="media/word_long_white.png">
           </div>
 
       </div>
     </div>
 
       <div class="row" style="margin-top: 20px; background-color: #171e26; width:100%;">
-          <h4 class="copyright">© 2019 Apotheosis - NMT CSE321</h4>
+          <h4 class="copyright">&copy; 2019 Apotheosis - NMT CSE321</h4>
       </div>
 
   </footer>
