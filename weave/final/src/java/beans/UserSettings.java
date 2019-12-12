@@ -15,11 +15,11 @@ import java.util.HashMap;
  * @author sterling
  */
 public class UserSettings implements Serializable {
-    private String[] genreList = {"ROCK", "RAP", "POP", "CLASSICAL", "COUNTRY", 
-        "GRUNGE", "TRAP", "TECHNO", "OLDIES", "ELECTRONICA", "WORLD", "METAL"};
+    private String[] genreList = {"ROCK", "HIP-HOP", "POP", "CLASSICAL", "COUNTRY", 
+        "GRUNGE", "R-N-B", "TECHNO", "EMO", "ELECTRONIC", "WORLD-MUSIC", "METAL"};
     
-    private String[] tagList = {"HAPPY", "UPBEAT", "DEPRESSING", "SLOW", "FAST", 
-        "SOOTHING", "QUIET", "120bpm", "SLEEP", "EXERCISE", "DRIVING", "RELAXATION"};
+    private String[] tagList = {"HAPPY", "GROOVE", "SOUL", "AFROBEAT", "ANIME", 
+        "CHILL", "AMBIENT", "DETROIT-TECHNO", "SLEEP", "WORK-OUT", "STUDY", "RAINY-DAY"};
     
     //private static HashMap genrePresence;
     //private static HashMap genrePresence;
