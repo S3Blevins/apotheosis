@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300&display=swap');
+
+
+body {
+	background-color: #F5F5F5;
+}
+
+/* Renamed img to classes to prevent every img from spinning. */
+#spin {
+	transition: all .8s;
+  transition-timing: ease-in-out;
+}
+
+#spin:hover {
+	transform: rotate(360deg);
+}
+
+.site-nav {
+	margin-top: 0px;
+	padding-top: 0px;
+	position: relative;
+	z-index: 1;
+	width:100%;
+}
+
+#topbar {
+	background-color: #1f2833;
+	margin-bottom: 0px;
+	box-shadow: 0px 5px 5px grey;
+}
+
+/* changes icons in top bar to off-white */
+#topbar .navbar-brand {
+	color:  #f9f9f9;
+}
+
+#topbar .navbar-brand:hover {
+	color:  #4362a0;
+}
+
+.sidebar {
+	transition: all .8s;
+	transition-timing: ease-in-out;
+	transform: translateX(-250px);
+}
+
+.sidebar-show {
+		transform: translateX(0px);
+}
+
+.menu {
+	/* Add some design elements */
+
+  text-decoration: none;
+	background-color: white;
+	color: white;
+
+	height: 100vh;
+	width: 200px;
+}
+
+.menu a {
+  /* This affects the menu button text */
+  display: block;
+	margin-left: 10px;
+  padding: 15px;
+
+  /* No underline under the tab texts */
+  text-decoration: none;
+	color: grey;
+
+	font-size: 1.3em;
+  line-height: 1.7em;
+}
+
+/* adds padding to icons */
+#menu-icon{
+	padding-right: 15px;
+}
+
+/* same color as the background of website */
+.menu a:hover {
+	color: #E1E1E1;
+}
+
+/* needed to apply everything under active */
+.active > * {
+	color: #1f2833;
+}
+
+.active >  #submit {
+  	text-decoration: underline;
+}
+
+#userbar {
+	background-color: white;
+	width: 100vw;
+}
+
+#userbar .navbar-brand {
+		color: #1f2833;
+		margin-right: 10px;
+}
+
+.logins {
+	position: absolute;
+	top: 50%;
+	left:50%;
+	transform: translateY(-50%);
+	transform: translateX(-50%);
+}
+
+.login-button {
+
+  max-width: 250px;
+
+  /* Wrap the image instead of having extra padding */
+}
+
+/* TODO: Image and Button don't match. We should replace with an image */
+#no-use-spotify {
+	background-color: gray;
+
+	color: white;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
+	display: block;
+	font-size: 13px;
+	border-radius: 80px;
+	font-family: 'Montserrat', sans-serif;
+
+  margin-top: 20px;
+}
+
+
+#no-use-spotify:hover {
+    background-color: #1f2833;
+}
+
+#use-spotify:hover {
+		filter: brightness(0.4);
+}
+
+
+.playlist {
+    background: url("media/apotheosis_coverart.png") 50% 50% no-repeat;
+    width: 30%;
+    height: 200px;
+    display: inline-block;
+}
+
+.footer {
+  width: 100%;
+  background-color: #1f2833;
+  box-shadow: 0px -5px 5px grey;
+  color: white;
+}
+
+.copyright {
+  text-align: center;
+  color: white;
+}
+
+#footer-links {
+    list-style-type: none;
+    text-decoration: none;
+    text-align: left;
+}
+
+/* USE BELOW FOR JSP FORM LINKS */
+
+#submit {
+  background:none;
+  border:none;
+}
+
+#option{
+
+  /* This affects the menu button text */
+  margin-left: 10px;
+  padding: 15px;
+
+  /* No underline under the tab texts */
+  color: grey;
+
+  font-size: 1.3em;
+  line-height: 1.7em;
+}
+
+#option:hover {
+  color: #E1E1E1;
+}
+
+footer {
+  margin-top: 30px;
+}
+
+.footer-spacing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+}

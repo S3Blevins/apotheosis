@@ -1,0 +1,65 @@
+body {
+  background-image: url("media/img.jpg");
+  background-size: 400%, 400%;
+  background-repeat: no-repeat;
+  animation: shimmer 200s ease infinite;
+}
+
+@keyframes shimmer {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+
+.intro {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transition: all .8s;
+  transition-timing: ease-in-out;
+}
+
+.intro:hover #logo-word{
+	transform: opacity ease-in;
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.intro:hover #logo{
+	transform: rotate(360deg);
+        margin-left: -100px;
+}
+
+#logo {
+        margin-left: -27px;
+	transition: all .8s;
+	transition-timing: ease-in-out;
+}
+
+#logo-word {
+	transition: all .8s;
+	transform: translateX(-15px);
+	transition-timing: ease-in-out;
+	opacity:0;
+}
+
+.intro-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+}
+
+.main-button {
+        max-width: 250px;
+        margin:10px;
+}
+
+#no-use-spotify:hover {
+		filter: brightness(0.4);
+}
+
+#use-spotify:hover {
+		filter: brightness(0.4);
+}
